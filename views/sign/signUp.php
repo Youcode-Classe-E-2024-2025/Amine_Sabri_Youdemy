@@ -42,7 +42,7 @@
             </div>
         </form>
         <div class="mt-1 text-center">
-            <p>Vous avez déjà un compte ? <a href="/login" class="text-green-700 font-bold hover:text-green-900">Connectez-vous</a></p>
+            <p>Vous avez déjà un compte ? <a href="./signIn.php" class="text-green-700 font-bold hover:text-green-900">Connectez-vous</a></p>
         </div>
     </div>
 

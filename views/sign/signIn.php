@@ -25,7 +25,7 @@
             </div>
         </form>
         <div class="mt-4 text-center">
-            <p>Vous n'avez pas de compte ? <a href="/register" class="text-green-700 font-bold hover:text-green-900">Créez un compte</a></p>
+            <p>Vous n'avez pas de compte ? <a href="./signUp.php" class="text-green-700 font-bold hover:text-green-900">Créez un compte</a></p>
         </div>
     </div>
 

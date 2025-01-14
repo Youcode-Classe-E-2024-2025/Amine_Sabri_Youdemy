@@ -11,7 +11,7 @@
     <div class="container  mx-auto mt-20 max-w-md bg-gray-200 p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl text-center font-bold mb-5 text-green-700">Créer un compte</h1>
 
-        <form action="/users/create" method="POST" >
+        <form action="../../index.php?action=create" method="POST" >
             <div class="grid grid-cols-2 gap-x-4 ">
                 <div class="mb-2">
                     <label for="username" class="block text-green-700 font-bold mb-2 text-sm">Nom d'utilisateur:</label>

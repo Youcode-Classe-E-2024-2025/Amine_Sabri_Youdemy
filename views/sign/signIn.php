@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un utilisateur</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body >
+
+    <?php
+
+    session_start();
+
+
+
+    if (isset($_SESSION['message'])) {
+        echo '
+        <div class="flex justify-center items-center p-4  fixed top-0 left-0 w-full z-50 ">
+            <p id="message" class="text-white bg-green-400 border-2 border-green-400 w-fit p-1 space-x-9 rounded-lg text-center">
+                ' . $_SESSION['message'] . '
+            </p>
+        </div>';
+        unset($_SESSION['message']);
+    }
+
+    
+
+
+    ?>
     <div class="container  mx-auto mt-28 max-w-md bg-gray-200 p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl text-center  font-bold mb-5 text-green-700">Connexion</h1>
 
@@ -29,5 +50,6 @@
         </div>
     </div>
 
+<script src="../../assets/js/script.js"></script>
 </body>
 </html>

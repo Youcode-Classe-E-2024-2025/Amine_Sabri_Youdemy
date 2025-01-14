@@ -10,6 +10,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role_id INT NOT NULL DEFAULT 3, 
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('actif', 'suspendu','pending') DEFAULT 'pending';
     FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE RESTRICT
 );
 

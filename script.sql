@@ -51,3 +51,19 @@ CREATE TABLE course_tag (
 );
 
 
+CREATE TABLE user_cours (
+    user_id INT NOT NULL,
+    cours_id INT NOT NULL,
+    PRIMARY KEY (user_id, cours_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (cours_id) REFERENCES courses(id) ON DELETE CASCADE
+);
+
+
+
+INSERT INTO roles (name) VALUES 
+('admin'), 
+('enseignant'), 
+('etudiant');
+
+

@@ -25,6 +25,7 @@ class UserController {
 
             if(empty(trim($username)) || empty(trim($email)) || empty(trim($password)) || empty(trim($role_id))){
                 $_SESSION["message"] = "Enter les inputs";
+                header('Location: views/sign/signUp.php');
                 return;
             }
             $hashPassword = password_hash($password,PASSWORD_DEFAULT);

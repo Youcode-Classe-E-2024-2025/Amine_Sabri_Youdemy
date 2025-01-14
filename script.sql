@@ -67,3 +67,46 @@ INSERT INTO roles (name) VALUES
 ('etudiant');
 
 
+INSERT INTO categories (name) VALUES 
+('Informatique'), 
+('Mathématiques'), 
+('Sciences Sociales'), 
+('Langues');
+
+
+
+
+INSERT INTO tags (name) VALUES 
+('Beginner'), 
+('Advanced'), 
+('Mathematics'), 
+('Programming'), 
+('Algorithms');
+
+
+
+INSERT INTO courses (title, description, video_url, image_url, document_url, category_id) VALUES 
+('Introduction à la programmation', 'Cours pour débutants en programmation avec Python', 'video_url_1', 'image_url_1', 'document_url_1', 1),
+('Algorithmes et Structures de Données', 'Cours avancé sur les algorithmes et les structures de données', 'video_url_2', 'image_url_2', 'document_url_2', 1),
+('Calcul différentiel et intégral', 'Introduction aux concepts du calcul', 'video_url_3', 'image_url_3', 'document_url_3', 2);
+
+
+
+
+INSERT INTO course_tag (course_id, tag_id) VALUES 
+(1, 1), 
+(2, 2), 
+(2, 4), 
+(3, 3); 
+
+
+INSERT INTO users (username, email, password, role_id) VALUES 
+('admin1', 'admin1@example.com', 'hashed_password', 1),
+('prof1', 'prof1@example.com', 'hashed_password', 2),
+('etudiant1', 'etudiant1@example.com', 'hashed_password', 3);
+
+
+INSERT INTO user_cours (user_id, cours_id) VALUES 
+(3, 1), 
+(3, 2),
+(2, 3);

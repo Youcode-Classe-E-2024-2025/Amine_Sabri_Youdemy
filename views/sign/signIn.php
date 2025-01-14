@@ -11,9 +11,6 @@
     <?php
 
     session_start();
-
-
-
     if (isset($_SESSION['message'])) {
         echo '
         <div class="flex justify-center items-center p-4  fixed top-0 left-0 w-full z-50 ">
@@ -23,10 +20,6 @@
         </div>';
         unset($_SESSION['message']);
     }
-
-    
-
-
     ?>
     <div class="container  mx-auto mt-28 max-w-md bg-gray-200 p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl text-center  font-bold mb-5 text-green-700">Connexion</h1>

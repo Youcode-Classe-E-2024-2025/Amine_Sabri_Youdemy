@@ -22,6 +22,11 @@ class UserController {
             $password = $_POST['password'];
             $role_id = $_POST['role_id'];
             $status = 'actif';
+
+            if(empty(trim($username)) || empty(trim($email)) || empty(trim($password)) || empty(trim($role_id))){
+                $_SESSION["message"] = "Enter les inputs";
+                return;
+            }
             $hashPassword = password_hash($password,PASSWORD_DEFAULT);
             $user = new User($this->db, $username, $email, $hashPassword, $role_id, $status);
             $user->create();

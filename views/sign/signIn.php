@@ -31,7 +31,7 @@
     <div class="container  mx-auto mt-28 max-w-md bg-gray-200 p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl text-center  font-bold mb-5 text-green-700">Connexion</h1>
 
-        <form action="/users/create" method="POST" class="">
+        <form action="../../index.php?action=connexion" method="POST" class="">
             <div class="mb-4">
                 <label for="email" class="block text-green-700 font-bold mb-2 text-sm">Email:</label>
                 <input type="email" id="email" name="email" class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-green-500" required>

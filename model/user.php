@@ -9,7 +9,7 @@ class User {
     private $status;
     private $db; 
 
-    public function __construct($db, $username, $email, $password, $role_id, $status) {
+    public function __construct($db, $username = null, $email = null, $password = null, $role_id = null, $status = null) {
         $this->db = $db;
         $this->username = $username;
         $this->email = $email;
@@ -40,7 +40,21 @@ class User {
         $stmt->bindParam(':role_id', $this->role_id);
         return $stmt->execute();
     }
-    
+
+    public function findByEmail($email,$password) {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                return $user; 
+            } else {
+                return false; 
+            }
+        }
+    }
 }
 
 ?>

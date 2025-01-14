@@ -22,7 +22,8 @@ class UserController {
             $password = $_POST['password'];
             $role_id = $_POST['role_id'];
             $status = 'actif';
-            $user = new User($this->db, $username, $email, $password, $role_id, $status);
+            $hashPassword = password_hash($password,PASSWORD_DEFAULT);
+            $user = new User($this->db, $username, $email, $hashPassword, $role_id, $status);
             $user->create();
             // var_dump($_POST);
             // var_dump($status);
@@ -35,7 +36,6 @@ class UserController {
 
 }
 
-// // Example usage:
 // $controller = new UserController();
 // $controller->index();
 

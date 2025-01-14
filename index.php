@@ -1,5 +1,6 @@
 <?php
 include_once('./controller/userController.php');
+include_once('./controller/authController.php');
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 } else {
@@ -7,16 +8,14 @@ if (isset($_GET['action'])) {
 }
 
 $controller = new UserController();
+$con = new AuthController();
 
 switch ($action) {
-    // case 'index':
-    //     $controller->index();
-    //     break;
-    case 'create':
+    case 'regester':
         $controller->create();
         break;
-    default:
-        $controller->index();
+    case 'connexion':
+        $con->connexion();
         break;
 }
 

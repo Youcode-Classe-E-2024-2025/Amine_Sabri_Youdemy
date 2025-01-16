@@ -67,5 +67,76 @@ class Course
         return $stmt->execute([$id]);
     }
 
+    // Getters and setters...
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function getVideoUrl()
+    {
+        return $this->videoUrl;
+    }
+
+    public function setVideoUrl($videoUrl)
+    {
+        $this->videoUrl = $videoUrl;
+    }
+
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+    }
+
+    public function getDocumentUrl()
+    {
+        return $this->documentUrl;
+    }
+
+    public function setDocumentUrl($documentUrl)
+    {
+        $this->documentUrl = $documentUrl;
+    }
+
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
 }
 ?>

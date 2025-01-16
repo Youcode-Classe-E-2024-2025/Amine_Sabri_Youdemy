@@ -37,6 +37,15 @@ class Tag {
         return $stmt->execute();
     }
 
+    // Find a tag by ID
+    public function findById($id) {
+        $sql = "SELECT * FROM tags WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
 
 
 

@@ -59,5 +59,11 @@ class CategoryController {
     
 }
 
+// $cat = new CategoryController();
 
+// $cat->createCategory('correct category');
+// $cat->updateCategory(5,'modifier category');
+// $cat->deleteCategory(5);
+// $cat->getAllCategories();
+// var_dump($cat->getCategoryById(1));
 ?>

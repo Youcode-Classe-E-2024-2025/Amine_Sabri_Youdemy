@@ -72,4 +72,26 @@
     </form>
 </div>
 
-
+<?php if (isset($_GET['id'])): ?>
+<div class="mt-8">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Modifier le Tag</h2>
+    <?php
+    $tagId = $_GET['id'];
+    $tagController = new TagController();
+    $tag = $tagController->getById($tagId);
+    if ($tag): ?>
+        <form action="../../index.php?action=editTags" method="POST" class="space-y-4">
+            <input type="hidden" name="id" value="<?= $tag['data']['id']; ?>">
+            <div>
+                <label for="tag_name" class="block text-gray-700">Nom du tag</label>
+                <input type="text" name="name" id="name" value="<?= htmlspecialchars($tag['data']['name']); ?>" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div>
+                <button type="submit" class="w-full bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">Modifier</button>
+            </div>
+        </form>
+    <?php else: ?>
+        <p class="text-red-500">Tag non trouvé.</p>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

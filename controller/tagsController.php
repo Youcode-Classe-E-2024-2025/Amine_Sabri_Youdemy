@@ -38,7 +38,16 @@ class TagController {
         }
     }
     
-
+    public function delete($id) {
+        $this->modelTag->setId($id);
+        
+        if ($this->modelTag->delete()) {
+            return ['success' => true, 'message' => 'Tag deleted successfully.'];
+        } else {
+            return ['success' => false, 'message' => 'Failed to delete tag.'];
+        }
+    }
+    
 
 
 

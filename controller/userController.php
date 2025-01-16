@@ -55,10 +55,10 @@ class UserController {
     }
     
     public function getPaginatedUsers($page, $resultsPerPage) {
-        $totalUsers = User::countAllUsers($this->db); // Appel au modèle pour compter les utilisateurs
-        $totalPages = ceil($totalUsers / $resultsPerPage); // Calcul des pages totales
+        $totalUsers = User::countAllUsers($this->db);
+        $totalPages = ceil($totalUsers / $resultsPerPage);
         
-        $users = User::readAllPaginated($this->db, $page, $resultsPerPage); // Récupération des utilisateurs paginés
+        $users = User::readAllPaginated($this->db, $page, $resultsPerPage); 
     
         return [
             'users' => $users,

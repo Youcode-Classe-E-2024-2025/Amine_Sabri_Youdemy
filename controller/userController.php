@@ -38,8 +38,42 @@ class UserController {
             header('Location: ../views/sign/signUp.php');
         }
     }
+    
+
+    public function updateStatus() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $_POST['user_id'];
+            $status = $_POST['status'];
+            $user = User::updateStatus($this->db, $userId, $status);
+            if ($user){
+                header('Location: views/layouts/dashbord.php?page=users');
+            } else {
+                header('Location: views/layouts/dashbord.php?page=users');
+            }
+        }
+        $this->index();
+    }
+    
+    public function getPaginatedUsers($page, $resultsPerPage) {
+        $totalUsers = User::countAllUsers($this->db); // Appel au modèle pour compter les utilisateurs
+        $totalPages = ceil($totalUsers / $resultsPerPage); // Calcul des pages totales
+        
+        $users = User::readAllPaginated($this->db, $page, $resultsPerPage); // Récupération des utilisateurs paginés
+    
+        return [
+            'users' => $users,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ];
+    }
+    
+    
+    
+    
 
 }
 
+// $controller = new UserController();
+// $controller->updateStatus();
 
 ?>

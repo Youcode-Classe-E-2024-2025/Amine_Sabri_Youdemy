@@ -1,5 +1,6 @@
 <?php require_once __DIR__ . "/../../controller/categorieController.php" ?>
 <?php require_once __DIR__ . "/../../controller/tagsController.php" ?>
+<?php require_once __DIR__ . "/../../controller/userController.php" ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,18 +27,19 @@
                     if (isset($_GET['page'])) {
                         $page = $_GET['page'];
                         switch ($page) {
-                            // case 'accueil':
-                            //     include('includes/accueil.php');
-                            //     break;
-                            // case 'statistiques':
-                            //     include('includes/statistiques.php');
-                            //     break;
-                            // case 'projets':
-                            //     include('includes/projets.php');
-                            //     break;
-                            // case 'messages':
-                            //     include('includes/messages.php');
-                            //     break;
+                            case 'users':
+                                $userController = new UserController();
+                                $page = isset($_GET['p']) ? (int)$_GET['p'] : 1;
+                                $resultsPerPage = 3;
+                                $paginationData = $userController->getPaginatedUsers($page, $resultsPerPage);
+                            
+                                $users = $paginationData['users'];
+                                $totalPages = $paginationData['totalPages'];
+                                $currentPage = $paginationData['currentPage'];
+                            
+                                include('../userlist.php');
+                                break;
+
                             case 'categories':
                                 $cat = new CategoryController();
                                 $page = isset($_GET['p']) ? (int)$_GET['p'] : 1;
@@ -51,6 +53,7 @@
                                 include('../Categories.php');
                                 
                                 break;
+                                
                             case 'tags':
                                 $tagController = new TagController();
                                 $page = isset($_GET['p']) ? (int)$_GET['p'] : 1;

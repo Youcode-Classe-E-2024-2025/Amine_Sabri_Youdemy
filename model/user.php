@@ -54,7 +54,7 @@ class User {
                 return false; 
             }
         }
-    }
+    }  
 }
 
 ?>

@@ -11,8 +11,7 @@ class UserController {
     }
 
     public function index() {
-        $users = User::getAll($this->db);
-        include 'views/user_list.php';
+        return User::getAllWithRoles($this->db); 
     }
 
     public function create() {
@@ -42,7 +41,5 @@ class UserController {
 
 }
 
-// $controller = new UserController();
-// $controller->index();
 
 ?>

@@ -19,6 +19,9 @@ switch ($action) {
     case 'connexion':
         $con->connexion();
         break;
+    case 'updateStatus':
+        $controller->updateStatus();
+        break;
     case 'createCategories';
         $categories->createCategory();
         break;

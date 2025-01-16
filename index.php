@@ -19,7 +19,15 @@ switch ($action) {
     case 'connexion':
         $con->connexion();
         break;
-
+    case 'createCategories';
+        $categories->createCategory();
+        break;
+    case 'editCategories';
+        $categories->updateCategory();
+        break;
+    case 'deleteCategories';
+        $categories->deleteCategory();
+        break;
 }
 
 ?>

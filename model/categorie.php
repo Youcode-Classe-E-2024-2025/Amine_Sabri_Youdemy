@@ -27,6 +27,12 @@ class Category {
     }
 
 
+    public function create() {
+        $query = "INSERT INTO categories (name) VALUES (:name)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':name', $this->name);
+        return $stmt->execute();
+    }
 
     
 }

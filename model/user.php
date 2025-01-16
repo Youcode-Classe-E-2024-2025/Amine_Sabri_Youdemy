@@ -73,6 +73,13 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function updateStatus($db, $userId, $status) {
+        $sql = "UPDATE users SET status = :status WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 
 
 

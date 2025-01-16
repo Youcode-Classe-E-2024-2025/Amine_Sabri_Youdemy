@@ -1,4 +1,5 @@
 <?php require_once __DIR__ . "/../../controller/categorieController.php" ?>
+<?php require_once __DIR__ . "/../../controller/tagsController.php" ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -48,7 +49,21 @@
                                 $totalPages = $paginationData['totalPages'];
                                 $currentPage = $paginationData['currentPage'];
                                 include('../Categories.php');
+                                
                                 break;
+                            case 'tags':
+                                $tagController = new TagController();
+                                $page = isset($_GET['p']) ? (int)$_GET['p'] : 1;
+                                $resultsPerPage = 3;
+                            
+                                $paginationData = $tagController->getPaginatedTags($page, $resultsPerPage);
+                            
+                                $Tags = $paginationData['tags'];
+                                $totalPages = $paginationData['totalPages'];
+                                $currentPage = $paginationData['currentPage'];
+                                include('../tags.php');
+                                break;
+                                
                             default:
                                 echo "<h2>Page non trouvée</h2>";
                         }

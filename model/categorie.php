@@ -42,5 +42,13 @@ class Category {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function readById($id) {
+        $query = "SELECT * FROM categories WHERE id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     
 }

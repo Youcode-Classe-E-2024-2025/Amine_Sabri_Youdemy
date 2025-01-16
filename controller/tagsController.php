@@ -26,7 +26,17 @@ class TagController {
             return ['success' => false, 'message' => 'Tag not found.'];
         }
     }
-
+    
+    public function update($id, $name) {
+        $this->modelTag->setId($id);
+        $this->modelTag->setName($name);
+        
+        if ($this->modelTag->update()) {
+            return ['success' => true, 'message' => 'Tag updated successfully.'];
+        } else {
+            return ['success' => false, 'message' => 'Failed to update tag.'];
+        }
+    }
     
 
 

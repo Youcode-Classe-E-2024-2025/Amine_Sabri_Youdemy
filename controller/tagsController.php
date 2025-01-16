@@ -59,7 +59,18 @@ class TagController {
     }
 
 
-
+    public function getPaginatedTags($page, $resultsPerPage) {
+        $totalTags = $this->modelTag->countAllTags(); // Compte le total des tags
+        $totalPages = ceil($totalTags / $resultsPerPage); // Calcule le nombre total de pages
+    
+        $Tags = $this->modelTag->readAllPaginated($page, $resultsPerPage); // Récupère les tags paginés
+    
+        return [
+            'tags' => $Tags,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ];
+    }
     
 }
 

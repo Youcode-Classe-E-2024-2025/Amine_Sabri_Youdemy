@@ -17,6 +17,22 @@ class TagController {
         }
     }
     
- 
+    public function getById($id) {
+        $result = $this->modelTag->findById($id);
+        if ($result) {
+            // var_dump($result);
+            return ['success' => true, 'data' => $result];
+        } else {
+            return ['success' => false, 'message' => 'Tag not found.'];
+        }
+    }
+
+    
+
+
+
+
+
+    
 }
 

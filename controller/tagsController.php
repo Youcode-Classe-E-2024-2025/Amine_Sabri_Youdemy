@@ -48,7 +48,15 @@ class TagController {
         }
     }
     
-
+    public function getAll() {
+        $result = $this->modelTag->findAll();
+        if ($result) {
+           var_dump($result);
+            return ['success' => true, 'data' => $result];
+        } else {
+            return ['success' => false, 'message' => 'No tags found.'];
+        }
+    }
 
 
 

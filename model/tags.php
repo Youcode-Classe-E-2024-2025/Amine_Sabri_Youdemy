@@ -72,6 +72,15 @@ class Tag {
     }
 
 
+    public function readAllPaginated($page, $resultsPerPage) {
+        $offset = ($page - 1) * $resultsPerPage;
+        $sql = "SELECT id, name FROM tags LIMIT :offset, :resultsPerPage";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':resultsPerPage', $resultsPerPage, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
 
     

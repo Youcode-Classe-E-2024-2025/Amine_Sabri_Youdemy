@@ -61,5 +61,11 @@ class Course
         ]);
     }
 
+    public function delete($id)
+    {
+        $stmt = $this->db->prepare("DELETE FROM courses WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
 }
 ?>

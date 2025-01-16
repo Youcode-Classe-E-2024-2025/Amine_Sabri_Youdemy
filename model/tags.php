@@ -47,6 +47,14 @@ class Tag {
         return $row;
     }
 
+    // Update an existing tag
+    public function update() {
+        $sql = "UPDATE tags SET name = :name WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 
 
 

@@ -1,6 +1,7 @@
 <?php
 include_once('./controller/userController.php');
 include_once('./controller/authController.php');
+include_once('./controller/categorieController.php');
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 } else {
@@ -8,6 +9,7 @@ if (isset($_GET['action'])) {
 }
 
 $controller = new UserController();
+$categories = new CategoryController();
 $con = new AuthController();
 
 switch ($action) {
@@ -17,6 +19,7 @@ switch ($action) {
     case 'connexion':
         $con->connexion();
         break;
+
 }
 
 ?>

@@ -15,7 +15,6 @@ class AuthController {
             $email = $_POST["email"];
             $password = $_POST["password"];
 
-            // Initialiser l'objet User
             $modelUser = new User($this->db);
 
             $user = $modelUser->findByEmail($email, $password);

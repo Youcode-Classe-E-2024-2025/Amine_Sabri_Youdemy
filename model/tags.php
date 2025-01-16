@@ -56,6 +56,13 @@ class Tag {
         return $stmt->execute();
     }
 
+    // Delete a tag by ID
+    public function delete() {
+        $sql = "DELETE FROM tags WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 
 
 

@@ -74,3 +74,9 @@ class TagController {
     
 }
 
+$tag = new TagController();
+// $tag->create('sarfar');
+// $tag->getById(1);
+// $tag->update(1, "Designing");
+// $tag->delete(7);
+// $tag->getAll();

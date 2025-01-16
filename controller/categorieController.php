@@ -15,5 +15,9 @@ class CategoryController {
             header('Location: views/layouts/dashbord.php?page=categories');
         }
     }
-}
+
+    public function getAllCategories() {
+        return $this->model->readAll(); 
+    }
+
 ?>

@@ -29,5 +29,21 @@ class Tag {
         $this->name = $name;
     }
 
+    // Create a new tag
+    public function create() {
+        $sql = "INSERT INTO tags (name) VALUES (:name)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':name', $this->name);
+        return $stmt->execute();
+    }
+
+
+
+
+
+
+
+    
+
     
 }

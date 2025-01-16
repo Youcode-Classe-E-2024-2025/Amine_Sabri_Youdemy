@@ -59,5 +59,17 @@
     </div>
 </div>
 
+<div class="mt-8">
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Ajouter un Tag</h2>
+    <form action="../../index.php?action=createTags" method="POST" class="space-y-4">
+        <div>
+            <label for="tag_name" class="block text-gray-700">Nom du tag</label>
+            <input type="text" name="tag_name" id="tag_name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+        <div>
+            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Ajouter</button>
+        </div>
+    </form>
+</div>
 
 

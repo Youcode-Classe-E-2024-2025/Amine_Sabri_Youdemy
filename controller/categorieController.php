@@ -15,6 +15,5 @@ class CategoryController {
             header('Location: views/layouts/dashbord.php?page=categories');
         }
     }
-
 }
 ?>

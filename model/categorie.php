@@ -65,5 +65,21 @@ class Category {
         return $stmt->execute();
     }
 
+    public function readAllPaginated($page, $resultsPerPage) {
+        $offset = ($page - 1) * $resultsPerPage;
+        $sql = "SELECT id, name FROM categories LIMIT :offset, :resultsPerPage";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':resultsPerPage', $resultsPerPage, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function countAllCategories() {
+        $sql = "SELECT COUNT(*) AS total FROM categories";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total']; 
+    }
     
 }

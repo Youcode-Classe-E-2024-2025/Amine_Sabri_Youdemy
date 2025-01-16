@@ -4,12 +4,12 @@
         <table class="table-auto w-full text-left border-collapse border border-gray-200">
             <thead class="bg-gray-800 text-white">
                 <tr>
-                    <th class="px-6 py-3 border border-gray-300">ID</th>
-                    <th class="px-6 py-3 border border-gray-300">utilisateur</th>
-                    <th class="px-6 py-3 border border-gray-300">Email</th>
-                    <th class="px-6 py-3 border border-gray-300">Statut</th>
-                    <th class="px-6 py-3 border border-gray-300">Rôle</th>
-                    <th class="px-6 py-3 border border-gray-300">Créé le</th>
+                    <th class="px-3 py-1 border border-gray-300">ID</th>
+                    <th class="px-3 py-1 border border-gray-300">utilisateur</th>
+                    <th class="px-3 py-1 border border-gray-300">Email</th>
+                    <th class="px-3 py-1 border border-gray-300">Statut</th>
+                    <th class="px-3 py-1 border border-gray-300">Rôle</th>
+                    <th class="px-3 py-1 border border-gray-300">Créé le</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@
                                     <input type="hidden" name="user_id" value="<?= $user['id']; ?>">
                                     <select 
                                         name="status" 
-                                        class="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                        class="border rounded rounded-3xl pl-1 outline-none" 
                                         onchange="this.form.submit()" 
                                         style="
                                             background-color: <?= $user['status'] === 'actif' ? '#d1fae5' : ($user['status'] === 'suspendu' ? '#fee2e2' : '#fef3c7'); ?>; 
@@ -45,7 +45,7 @@
                             </td>
 
                             <td class="px-6 py-3"><?= ucfirst($user['role']); ?></td>
-                            <td class="px-6 py-3"><?= date('d/m/Y H:i', strtotime($user['created_at'])); ?></td>
+                            <td class="px-6 py-3"><?= date('d/m/Y', strtotime($user['created_at'])); ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

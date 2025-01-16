@@ -6,17 +6,17 @@
             <thead class="bg-gray-800 text-white">
                 <tr>
                     <!-- <th class="px-6 py-3 border border-gray-300">ID</th> -->
-                    <th class="px-6 py-3 border border-gray-300">Nom</th>
-                    <th class="px-6 py-3 border border-gray-300 text-center">Actions</th>
+                    <th class="px-3 py-1 border border-gray-300">Nom</th>
+                    <th class="px-3 py-1 border border-gray-300 text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (!empty($Tags)): ?>
                     <?php foreach ($Tags as $tag): ?>
                         <tr class="hover:bg-gray-100 border-b border-gray-200">
-                            <!-- <td class="px-6 py-3"><?= $tag['id'];?></td> -->
-                            <td class="px-6 py-3"><?= $tag['name']; ?></td>
-                            <td class="px-6 py-3 text-center">
+                            <!-- <td class="px-3 py-1"><?= $tag['id'];?></td> -->
+                            <td class="px-3 py-1"><?= $tag['name']; ?></td>
+                            <td class="px-3 py-1 text-center">
                                 <a href="dashbord.php?page=tags&id=<?= $tag['id']; ?>"                                    class="inline-block text-yellow-500 hover:text-yellow-600">
                                     <i class="bi bi-pencil-square text-xl"></i>
                                 </a>
@@ -31,7 +31,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="3" class="px-6 py-3 text-center text-gray-500">Aucun tag trouvé.</td>
+                        <td colspan="3" class="px-3 py-1 text-center text-gray-500">Aucun tag trouvé.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

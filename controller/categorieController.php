@@ -24,4 +24,15 @@ class CategoryController {
         return $this->model->readById($id);
     }
 
+    public function updateCategory() {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $this->model->setId($id);
+            $this->model->setName($name);
+            $Categories = $this->model->update();
+            header('Location: views/layouts/dashbord.php?page=categories');
+        }
+    }
+
 ?>

@@ -20,4 +20,8 @@ class CategoryController {
         return $this->model->readAll(); 
     }
 
+    public function getCategoryById($id) {
+        return $this->model->readById($id);
+    }
+
 ?>

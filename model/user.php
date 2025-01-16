@@ -54,7 +54,31 @@ class User {
                 return false; 
             }
         }
-    }  
+    }
+
+
+    public static function getAllWithRoles($db) {
+        $sql = "SELECT 
+                    users.id,
+                    users.username,
+                    users.email,
+                    users.status,
+                    users.created_at,
+                    roles.name AS role_name
+                FROM users
+                INNER JOIN roles ON users.role_id = roles.id
+                ORDER BY users.created_at DESC";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+
+    
+    
+    
 }
 
 ?>

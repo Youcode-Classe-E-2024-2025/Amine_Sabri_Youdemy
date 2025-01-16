@@ -10,10 +10,10 @@ class UserController {
         $this->db = $database->getConnection();
     }
 
-    // public function index() {
-    //     $users = User::getAll($this->db);
-    //     include 'views/user_list.php';
-    // }
+    public function index() {
+        $users = User::getAll($this->db);
+        include 'views/user_list.php';
+    }
 
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -46,5 +46,20 @@ class Course
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function update($id)
+    {
+        $stmt = $this->db->prepare("UPDATE courses SET title = ?, description = ?, video_url = ?, image_url = ?, document_url = ?, category_id = ?, price = ? WHERE id = ?");
+        return $stmt->execute([
+            $this->title, 
+            $this->description, 
+            $this->videoUrl, 
+            $this->imageUrl, 
+            $this->documentUrl, 
+            $this->categoryId, 
+            $this->price, 
+            $id
+        ]);
+    }
+
 }
 ?>

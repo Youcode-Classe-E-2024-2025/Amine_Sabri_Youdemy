@@ -82,7 +82,25 @@ class User {
     }
 
 
-
+    public static function countAllUsers($db) {
+        $sql = "SELECT COUNT(*) AS total FROM users";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+    
+    public static function readAllPaginated($db, $page, $resultsPerPage) {
+        $offset = ($page - 1) * $resultsPerPage;
+        $sql = "SELECT u.id, u.username, u.email, u.status, u.created_at ,r.name AS role 
+                FROM users u
+                INNER JOIN roles r ON u.role_id = r.id
+                LIMIT :offset, :resultsPerPage";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindValue(':resultsPerPage', $resultsPerPage, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     
     
     

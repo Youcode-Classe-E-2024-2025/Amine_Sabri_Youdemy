@@ -44,4 +44,20 @@ class CategoryController {
     }
 
 
+    public function getPaginatedCategories($page, $resultsPerPage) {
+        $totalCategories = $this->model->countAllCategories(); 
+        $totalPages = ceil($totalCategories / $resultsPerPage); 
+    
+        $Categories = $this->model->readAllPaginated($page, $resultsPerPage); 
+    
+        return [
+            'categories' => $Categories,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ];
+    }
+    
+}
+
+
 ?>

@@ -82,6 +82,11 @@ class Tag {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
-
+    public function countAllTags() {
+        $sql = "SELECT COUNT(*) AS total FROM tags";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total']; 
+    }
     
 }

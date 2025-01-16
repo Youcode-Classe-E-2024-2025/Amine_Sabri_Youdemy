@@ -56,4 +56,25 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Pagination -->
+<div class="mt-4 flex justify-center space-x-2">
+    <?php if ($currentPage > 1): ?>
+        <a href="dashbord.php?page=users&p=<?= $currentPage - 1; ?>" 
+           class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded">Précédent</a>
+    <?php endif; ?>
+
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+        <a href="dashbord.php?page=users&p=<?= $i; ?>" 
+           class="px-4 py-2 <?= $i == $currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'; ?> rounded">
+            <?= $i; ?>
+        </a>
+    <?php endfor; ?>
+
+    <?php if ($currentPage < $totalPages): ?>
+        <a href="dashbord.php?page=users&p=<?= $currentPage + 1; ?>" 
+           class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded">Suivant</a>
+    <?php endif; ?>
+</div>
+
 </div>

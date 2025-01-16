@@ -35,4 +35,13 @@ class CategoryController {
         }
     }
 
+    public function deleteCategory() {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $id = $_POST['id'];
+            $Categories = $this->model->delete($id);
+            header('Location: views/layouts/dashbord.php?page=categories');
+        }
+    }
+
+
 ?>

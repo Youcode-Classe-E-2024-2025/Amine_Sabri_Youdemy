@@ -10,9 +10,9 @@
                 </a>
             </div>
             <div class="hidden md:flex space-x-6">
-                <a href="#" class="text-gray-600 hover:text-primary transition duration-300">Accueil</a>
-                <a href="#" class="text-gray-600 hover:text-primary transition duration-300">Catalogue</a>
-                <a href="#" class="text-gray-600 hover:text-primary transition duration-300">Service</a>
+                <a href="#accueil" class="text-gray-600 hover:text-primary transition duration-300">Accueil</a>
+                <a href="#catalogue" class="text-gray-600 hover:text-primary transition duration-300">Catalogue</a>
+                <a href="#service" class="text-gray-600 hover:text-primary transition duration-300">Service</a>
             </div>
             <div class="hidden md:flex items-center space-x-4">
                 <a href="#" class="text-primary hover:text-primary-dark transition duration-300">Connexion</a>
@@ -26,8 +26,8 @@
         </div>
     </nav>
     <div class="md:hidden" x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90">
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Accueil</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Catalogue</a>
+        <a href="#accueil" class="block py-2 px-4 text-sm hover:bg-gray-200">Accueil</a>
+        <a href="#catalogue" class="block py-2 px-4 text-sm hover:bg-gray-200">Catalogue</a>
         <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Service</a>
         <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Connexion</a>
         <a href="#" class="block py-2 px-4 text-sm bg-primary text-white hover:bg-primary-dark">S'inscrire</a>

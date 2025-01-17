@@ -25,12 +25,15 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         [x-cloak] { display: none !important; }
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans" x-data="{ mobileMenu: false }">
     <?php include('./include/headerUser.php') ?>
     <main class="pt-16">
-        <section class="relative bg-gradient-to-br from-primary via-purple-600 to-secondary text-white py-40 overflow-hidden">
+        <section id="accueil" class="relative bg-gradient-to-br from-primary via-purple-600 to-secondary text-white py-40 overflow-hidden">
             <div class="container mx-auto px-6 relative z-10">
                 <div class="md:flex md:items-center md:justify-between">
                     <div class="md:w-1/2 mb-8 md:mb-0">
@@ -56,7 +59,7 @@
             </div>
         </section>
 
-        <section class="container mx-auto px-6 py-16">
+        <section id = "catalogue" class="container mx-auto px-6 py-16">
             <h2 class="text-4xl font-bold text-center mb-12">Explorez nos cours populaires</h2>
             <div class="mb-10">
                 <div class="relative" x-data="{ search: '' }">
@@ -90,7 +93,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Course Card 2 -->
+                <!-- Course Card 2
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
                     <div class="relative">
                         <img src="../image.png" alt="Design UX/UI avancé" class="w-full h-48 object-cover">
@@ -111,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Course Card 3 -->
+                Course Card 3
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
                     <div class="relative">
                         <img src="../image2.png" alt="Marketing digital" class="w-full h-48 object-cover">
@@ -132,8 +135,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mt-12 flex justify-center">
+            </div> -->
+            <!-- <div class="mt-12 flex justify-center">
                 <nav class="inline-flex rounded-md shadow" aria-label="Pagination">
                     <a href="#" class="px-4 py-2 rounded-l-md bg-white text-gray-700 hover:bg-gray-50 transition duration-300">Précédent</a>
                     <a href="#" class="px-4 py-2 bg-primary text-white hover:bg-primary-dark transition duration-300">1</a>
@@ -141,10 +144,10 @@
                     <a href="#" class="px-4 py-2 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">3</a>
                     <a href="#" class="px-4 py-2 rounded-r-md bg-white text-gray-700 hover:bg-gray-50 transition duration-300">Suivant</a>
                 </nav>
-            </div>
+            </div> -->
         </section>
 
-        <section class="bg-gray-100 py-16">
+        <section id="service" class="bg-gray-100 py-16">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12">Pourquoi choisir Youdemy ?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">

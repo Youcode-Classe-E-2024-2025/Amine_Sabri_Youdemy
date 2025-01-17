@@ -15,8 +15,8 @@
                 <a href="#service" class="text-gray-600 hover:text-primary transition duration-300">Service</a>
             </div>
             <div class="hidden md:flex items-center space-x-4">
-                <a href="#" class="text-primary hover:text-primary-dark transition duration-300">Connexion</a>
-                <a href="#" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition duration-300 transform hover:scale-105">S'inscrire</a>
+                <a href="./sign/signIn.php" class="text-primary hover:text-primary-dark transition duration-300">Connexion</a>
+                <a href="./sign/signUp.php" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition duration-300 transform hover:scale-105">S'inscrire</a>
             </div>
             <button @click="mobileMenu = !mobileMenu" class="md:hidden text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu">
                 <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
@@ -28,8 +28,8 @@
     <div class="md:hidden" x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90">
         <a href="#accueil" class="block py-2 px-4 text-sm hover:bg-gray-200">Accueil</a>
         <a href="#catalogue" class="block py-2 px-4 text-sm hover:bg-gray-200">Catalogue</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Service</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Connexion</a>
-        <a href="#" class="block py-2 px-4 text-sm bg-primary text-white hover:bg-primary-dark">S'inscrire</a>
+        <a href="#service" class="block py-2 px-4 text-sm hover:bg-gray-200">Service</a>
+        <a href="./sign/signIn.php" class="block py-2 px-4 text-sm hover:bg-gray-200">Connexion</a>
+        <a href="./sign/signUp.php" class="block py-2 px-4 text-sm bg-primary text-white hover:bg-primary-dark">S'inscrire</a>
     </div>
 </header>

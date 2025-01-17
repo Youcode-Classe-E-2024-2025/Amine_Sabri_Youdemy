@@ -1,6 +1,7 @@
 <?php require_once __DIR__ . "/../../controller/categorieController.php" ?>
 <?php require_once __DIR__ . "/../../controller/tagsController.php" ?>
 <?php require_once __DIR__ . "/../../controller/userController.php" ?>
+<?php require_once __DIR__ . "/../../controller/authController.php" ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -78,5 +79,12 @@
             </div>
         </main>
     </div>
+    <script>
+
+    document.querySelector('.relative').addEventListener('click', function() {
+        const dropdown = this.querySelector('.absolute');
+        dropdown.classList.toggle('hidden');
+    });
+</script>
 </body>
 </html>

@@ -19,6 +19,9 @@ switch ($action) {
     case 'connexion':
         $con->connexion();
         break;
+    case 'logout':
+        $con->logout();
+        break;
     case 'updateStatus':
         $controller->updateStatus();
         break;

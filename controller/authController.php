@@ -26,10 +26,10 @@ class AuthController {
                 if($user['status'] == "pending"){
                     $_SESSION["message"] = "Attends l'administration va accepter";
                     header('Location: views\sign\signIn.php');
-                }elseif($user['status'] == "actif"){
-                    header('Location: index.html');
-                }elseif($user['role_id'] == "1"){
-                    header('Location: index.html');
+                }elseif($user['status'] == "actif" && $user['role_id'] == "3"){
+                    // header('Location: index.html');
+                }elseif($user['role_id'] == "1" && $user['status'] == "actif"){
+                    header('Location: views/layouts/dashbord.php?page=users');
                 }
                 exit();
             } else {
@@ -42,7 +42,7 @@ class AuthController {
     public function logout() {
         session_start();
         session_destroy();
-        header('Location: ../views/sign/signIn.php');
+        header('Location: views/sign/signIn.php');
         exit();
     }
 }

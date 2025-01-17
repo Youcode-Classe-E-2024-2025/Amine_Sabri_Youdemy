@@ -1,7 +1,5 @@
 <?php
-
 require_once __DIR__ . '/../model/cours.php';
-require_once __DIR__ . '/../config/database.php';
 
 class CourseController
 {
@@ -9,9 +7,7 @@ class CourseController
 
     public function __construct()
     {
-        $database = new Database();
-        $db = $database->getConnection();
-        $this->courseModel = new Course($db);
+        $this->courseModel = new Course();
     }
 
     public function index()

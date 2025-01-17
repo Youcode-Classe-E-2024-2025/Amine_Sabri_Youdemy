@@ -5,7 +5,7 @@ include_once('./controller/categorieController.php');
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 } else {
-    $action = 'index';
+    header('Location: views/guest.php');
 }
 
 $controller = new UserController();

@@ -27,7 +27,7 @@ class AuthController {
                     $_SESSION["message"] = "Attends l'administration va accepter";
                     header('Location: views\sign\signIn.php');
                 }elseif($user['status'] == "actif" && $user['role_id'] == "3"){
-                    // header('Location: index.html');
+                    // header('Location: views/guest.php');
                 }elseif($user['role_id'] == "1" && $user['status'] == "actif"){
                     header('Location: views/layouts/dashbord.php?page=users');
                 }

@@ -161,12 +161,14 @@ $cours = new Course();
 // $cours->readOne(15);
 
 
-$cours->setTitle('Course');
-$cours->setDescription('Course ');
-$cours->setVideoUrl('http://example.com/google');
-$cours->setImageUrl('http://example.com/google.jpg');
-$cours->setDocumentUrl('http://example.com/google.pdf');
-$cours->setCategoryId(2);
-$cours->setPrice(10);
-$cours->update(15);
+// $cours->setTitle('Course');
+// $cours->setDescription('Course ');
+// $cours->setVideoUrl('http://example.com/google');
+// $cours->setImageUrl('http://example.com/google.jpg');
+// $cours->setDocumentUrl('http://example.com/google.pdf');
+// $cours->setCategoryId(2);
+// $cours->setPrice(10);
+// $cours->update(15);
+
+// $cours->delete(15);
 ?>

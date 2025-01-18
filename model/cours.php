@@ -82,12 +82,36 @@ class Course{
 
     public function readOne($id)
     {
-        $sql = "SELECT * FROM courses WHERE id = ?";
+        $sql = "
+            SELECT 
+                courses.id AS course_id,
+                courses.title AS course_title,
+                courses.description AS course_description,
+                courses.video_url,
+                courses.image_url,
+                courses.document_url,
+                courses.created_at,
+                categories.name AS category_name,
+                GROUP_CONCAT(tags.name SEPARATOR ', ') AS tags
+            FROM 
+                courses
+            LEFT JOIN 
+                categories ON courses.category_id = categories.id
+            LEFT JOIN 
+                course_tag ON courses.id = course_tag.course_id
+            LEFT JOIN 
+                tags ON course_tag.tag_id = tags.id
+            WHERE 
+                courses.id = ?
+            GROUP BY 
+                courses.id, categories.name;
+        ";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
-        $cours =  $stmt->fetch(PDO::FETCH_ASSOC);
+        $cours = $stmt->fetch(PDO::FETCH_ASSOC);
         var_dump($cours);
     }
+
 
     public function update($id)
     {
@@ -197,7 +221,7 @@ $cours = new Course();
 // $cours->create();
 
 // $cours->readAll();
-// $cours->readOne(15);
+// $cours->readOne(20);
 
 
 // $cours->setTitle('Course');

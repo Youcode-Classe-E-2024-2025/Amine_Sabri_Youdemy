@@ -20,8 +20,7 @@ class Course{
         $this->db = $database->getConnection();
     }
 
-    public function create()
-    {
+    public function create(){
         $sql = "INSERT INTO courses (title, description, video_url, image_url, document_url, category_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $coures = $stmt->execute([
@@ -36,8 +35,7 @@ class Course{
         return $coures;
     }
 
-    public function readAll()
-    {
+    public function readAll(){
         $sql = "SELECT * FROM courses ORDER BY created_at DESC";
         $stmt = $this->db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -48,7 +46,8 @@ class Course{
         $sql = "SELECT * FROM courses WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $cours =  $stmt->fetch(PDO::FETCH_ASSOC);
+        var_dump($cours);
     }
 
     public function update($id)
@@ -146,7 +145,7 @@ class Course{
         $this->price = $price;
     }
 }
-// $cours = new Course();
+$cours = new Course();
 // $cours->setTitle('Course Title');
 // $cours->setDescription('Course Description');
 // $cours->setVideoUrl('http://example.com/video');
@@ -155,4 +154,7 @@ class Course{
 // $cours->setCategoryId(1);
 // $cours->setPrice(100);
 // $cours->create();
+
+// $cours->readAll();
+// $cours->readOne(15);
 ?>

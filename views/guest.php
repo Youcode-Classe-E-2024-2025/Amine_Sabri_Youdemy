@@ -6,6 +6,7 @@
     <title>Youdemy - Révolutionnez votre apprentissage en ligne</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -78,7 +79,7 @@
                     <div class="relative">
                         <img src="./uploads/<?= htmlspecialchars($course['image_url']); ?>" alt="<?= htmlspecialchars($course['title']); ?>" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300" :class="{ 'opacity-100': hover }">
-                            <a href="./sign/signIn.php" class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">Voir le cours</a>
+                            <a href="./views/sign/signIn.php" class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">Voir le cours</a>
                         </div>
                     </div>
                     <div class="p-6">
@@ -95,15 +96,37 @@
                     </div>
                 </div>
                 <?php endforeach; ?>
-                <!-- <div class="mt-12 flex justify-center">
-                    <nav class="inline-flex rounded-md shadow" aria-label="Pagination">
-                        <a href="#" class="px-4 py-2 rounded-l-md bg-white text-gray-700 hover:bg-gray-50 transition duration-300">Précédent</a>
-                        <a href="#" class="px-4 py-2 bg-primary text-white hover:bg-primary-dark transition duration-300">1</a>
-                        <a href="#" class="px-4 py-2 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">2</a>
-                        <a href="#" class="px-4 py-2 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">3</a>
-                        <a href="#" class="px-4 py-2 rounded-r-md bg-white text-gray-700 hover:bg-gray-50 transition duration-300">Suivant</a>
-                    </nav>
-                </div>  -->
+            </div>
+            <!-- pagination -->
+            <div class="flex justify-center mt-6">
+                <ul class="flex space-x-2">
+                    <li class="page-item <?= $page == 1 ? 'disabled' : ''; ?>">
+                        <a class="page-link <?= $page == 1 ? 'cursor-not-allowed' : 'hover:bg-blue-500 hover:text-white'; ?> 
+                            bg-blue-300 text-white rounded-lg p-2 transition duration-300" 
+                            href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])); ?>" aria-label="Previous">
+                            <span aria-hidden="true" class="bi bi-chevron-left"></span>
+                        </a>
+                    </li>
+
+                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                        <li class="page-item <?= $i == $page ? 'bg-blue-500 text-white' : ''; ?> 
+                            rounded-lg shadow-md">
+                            <a class="page-link <?= $i == $page ? 'cursor-default' : 'hover:bg-blue-500 hover:text-white'; ?> 
+                                bg-blue-300 text-white rounded-lg p-2 transition duration-300" 
+                                href="?<?= http_build_query(array_merge($_GET, ['page' => $i])); ?>">
+                                <?= $i; ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <li class="page-item <?= $page == $totalPages ? 'disabled' : ''; ?>">
+                        <a class="page-link <?= $page == $totalPages ? 'cursor-not-allowed' : 'hover:bg-blue-500 hover:text-white'; ?> 
+                            bg-blue-300 text-white rounded-lg p-2 transition duration-300" 
+                            href="?<?= http_build_query(array_merge($_GET, ['page' => $page + 1])); ?>" aria-label="Next">
+                            <span aria-hidden="true" class="bi bi-chevron-right"></span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </section>
 

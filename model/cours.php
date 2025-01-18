@@ -35,35 +35,48 @@ class Course{
         return $coures;
     }
 
-    public function readAll() {
-        $sql = "
-            SELECT 
-                c.id ,
-                c.title,
-                c.description,
-                c.video_url,
-                c.image_url,
-                c.document_url,
-                c.price,
-                c.created_at,
-                cat.name ,
-                GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
-            FROM 
-                courses c
-            LEFT JOIN 
-                categories cat ON c.category_id = cat.id
-            LEFT JOIN 
-                course_tag ct ON c.id = ct.course_id
-            LEFT JOIN 
-                tags t ON ct.tag_id = t.id
-            GROUP BY 
-                c.id, cat.name
-            ORDER BY 
-                c.created_at DESC;
-        ";
-    
+    public function readAll($limit, $offset)
+{
+    $sql = "
+        SELECT 
+            c.id,
+            c.title,
+            c.description,
+            c.video_url,
+            c.image_url,
+            c.document_url,
+            c.price,
+            c.created_at,
+            cat.name ,
+            GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
+        FROM 
+            courses c
+        LEFT JOIN 
+            categories cat ON c.category_id = cat.id
+        LEFT JOIN 
+            course_tag ct ON c.id = ct.course_id
+        LEFT JOIN 
+            tags t ON ct.tag_id = t.id
+        GROUP BY 
+            c.id, cat.name
+        ORDER BY 
+            c.created_at DESC
+        LIMIT :limit OFFSET :offset;
+    ";
+
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+    public function countCourses() {
+        $sql = "SELECT COUNT(*) AS total FROM courses";
         $stmt = $this->db->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
     
 

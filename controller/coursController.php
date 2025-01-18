@@ -12,9 +12,28 @@ class CourseController
 
     public function index()
     {
-        $courses = $this->courseModel->readAll();
+        // Nombre d'éléments par page
+        $perPage = 3;
+    
+        // Obtenir la page actuelle depuis l'URL, par défaut 1
+        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+    
+        // Calculer l'offset
+        $offset = ($page - 1) * $perPage;
+    
+        // Récupérer les cours avec pagination
+        $courses = $this->courseModel->readAll($perPage, $offset);
+    
+        // Obtenir le nombre total de cours
+        $totalCourses = $this->courseModel->countCourses();
+    
+        // Calculer le nombre total de pages
+        $totalPages = ceil($totalCourses / $perPage);
+    
+        // Inclure la vue avec les données
         include __DIR__ . '/../views/guest.php';
     }
+    
     
 
     public function show($id)
@@ -83,9 +102,5 @@ class CourseController
         }
     }
 }
-// $bb = new CourseController();
-
-// $bb->create();
-// $bb->index();
 ?>
 

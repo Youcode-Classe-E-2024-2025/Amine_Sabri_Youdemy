@@ -54,7 +54,7 @@ class Course{
     {
         $sql = "UPDATE courses SET title = ?, description = ?, video_url = ?, image_url = ?, document_url = ?, category_id = ?, price = ? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([
+        $cours = $stmt->execute([
             $this->title, 
             $this->description, 
             $this->videoUrl, 
@@ -64,6 +64,8 @@ class Course{
             $this->price, 
             $id
         ]);
+
+        return $cours;
     }
 
     public function delete($id)
@@ -157,4 +159,14 @@ $cours = new Course();
 
 // $cours->readAll();
 // $cours->readOne(15);
+
+
+$cours->setTitle('Course');
+$cours->setDescription('Course ');
+$cours->setVideoUrl('http://example.com/google');
+$cours->setImageUrl('http://example.com/google.jpg');
+$cours->setDocumentUrl('http://example.com/google.pdf');
+$cours->setCategoryId(2);
+$cours->setPrice(10);
+$cours->update(15);
 ?>

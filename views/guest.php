@@ -103,7 +103,7 @@
                     <li class="page-item <?= $page == 1 ? 'disabled' : ''; ?>">
                         <a class="page-link <?= $page == 1 ? 'cursor-not-allowed' : 'hover:bg-blue-500 hover:text-white'; ?> 
                             bg-blue-300 text-white rounded-lg p-2 transition duration-300" 
-                            href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])); ?>" aria-label="Previous">
+                            href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])); ?>#catalogue" aria-label="Previous">
                             <span aria-hidden="true" class="bi bi-chevron-left"></span>
                         </a>
                     </li>
@@ -113,7 +113,7 @@
                             rounded-lg shadow-md">
                             <a class="page-link <?= $i == $page ? 'cursor-default' : 'hover:bg-blue-500 hover:text-white'; ?> 
                                 bg-blue-300 text-white rounded-lg p-2 transition duration-300" 
-                                href="?<?= http_build_query(array_merge($_GET, ['page' => $i])); ?>">
+                                href="?<?= http_build_query(array_merge($_GET, ['page' => $i])); ?>#catalogue">
                                 <?= $i; ?>
                             </a>
                         </li>
@@ -122,7 +122,7 @@
                     <li class="page-item <?= $page == $totalPages ? 'disabled' : ''; ?>">
                         <a class="page-link <?= $page == $totalPages ? 'cursor-not-allowed' : 'hover:bg-blue-500 hover:text-white'; ?> 
                             bg-blue-300 text-white rounded-lg p-2 transition duration-300" 
-                            href="?<?= http_build_query(array_merge($_GET, ['page' => $page + 1])); ?>" aria-label="Next">
+                            href="?<?= http_build_query(array_merge($_GET, ['page' => $page + 1])); ?>#catalogue" aria-label="Next">
                             <span aria-hidden="true" class="bi bi-chevron-right"></span>
                         </a>
                     </li>

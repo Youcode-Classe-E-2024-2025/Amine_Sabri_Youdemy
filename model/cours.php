@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-class Course
-{
+class Course{
+
     private $id;
     private $title;
     private $description;
@@ -12,19 +12,19 @@ class Course
     private $categoryId;
     private $price;
     private $createdAt;
-
     private $db;
 
     public function __construct()
     {
         $database = new Database();
-        $this->$db = $database->getConnection();
+        $this->db = $database->getConnection();
     }
 
     public function create()
     {
-        $stmt = $this->db->prepare("INSERT INTO courses (title, description, video_url, image_url, document_url, category_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        return $stmt->execute([
+        $sql = "INSERT INTO courses (title, description, video_url, image_url, document_url, category_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($sql);
+        $coures = $stmt->execute([
             $this->title, 
             $this->description, 
             $this->videoUrl, 
@@ -33,24 +33,28 @@ class Course
             $this->categoryId, 
             $this->price
         ]);
+        return $coures;
     }
 
     public function readAll()
     {
-        $stmt = $this->db->query("SELECT * FROM courses ORDER BY created_at DESC");
+        $sql = "SELECT * FROM courses ORDER BY created_at DESC";
+        $stmt = $this->db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function readOne($id)
     {
-        $stmt = $this->db->prepare("SELECT * FROM courses WHERE id = ?");
+        $sql = "SELECT * FROM courses WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function update($id)
     {
-        $stmt = $this->db->prepare("UPDATE courses SET title = ?, description = ?, video_url = ?, image_url = ?, document_url = ?, category_id = ?, price = ? WHERE id = ?");
+        $sql = "UPDATE courses SET title = ?, description = ?, video_url = ?, image_url = ?, document_url = ?, category_id = ?, price = ? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
         return $stmt->execute([
             $this->title, 
             $this->description, 
@@ -65,7 +69,8 @@ class Course
 
     public function delete($id)
     {
-        $stmt = $this->db->prepare("DELETE FROM courses WHERE id = ?");
+        $sql = "DELETE FROM courses WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
         return $stmt->execute([$id]);
     }
 
@@ -141,4 +146,13 @@ class Course
         $this->price = $price;
     }
 }
+// $cours = new Course();
+// $cours->setTitle('Course Title');
+// $cours->setDescription('Course Description');
+// $cours->setVideoUrl('http://example.com/video');
+// $cours->setImageUrl('http://example.com/image.jpg');
+// $cours->setDocumentUrl('http://example.com/document.pdf');
+// $cours->setCategoryId(1);
+// $cours->setPrice(100);
+// $cours->create();
 ?>

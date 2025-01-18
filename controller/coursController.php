@@ -13,8 +13,9 @@ class CourseController
     public function index()
     {
         $courses = $this->courseModel->readAll();
-        include '../views/courses/index.php';
+        include __DIR__ . '/../views/guest.php';
     }
+    
 
     public function show($id)
     {
@@ -25,8 +26,8 @@ class CourseController
     public function create()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $title = htmlspecialchars($_POST['title']);
-            $description = htmlspecialchars($_POST['description']);
+            $title = $_POST['title'];
+            $description = $_POST['description'];
             $category_id = intval($_POST['category_id']);
             $price = floatval($_POST['price']);
 
@@ -60,8 +61,8 @@ class CourseController
             $this->courseModel->setDocumentUrl($documentFileName);
             $this->courseModel->setCategoryId($category_id);
             $this->courseModel->setPrice($price);
-
-            if ($this->courseModel->create()) {
+            $cours = $this->courseModel->create();
+            if($cours) {
                 header("Location: index.php");
                 exit;
             } else {
@@ -82,9 +83,9 @@ class CourseController
         }
     }
 }
-$bb = new CourseController();
+// $bb = new CourseController();
 
 // $bb->create();
-$bb->index();
+// $bb->index();
 ?>
 

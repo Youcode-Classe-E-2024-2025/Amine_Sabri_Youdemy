@@ -31,7 +31,7 @@
     </style>
 </head>
 <body class="bg-gray-50 font-sans" x-data="{ mobileMenu: false }">
-    <?php include('./include/headerUser.php') ?>
+    <?php include('./views/include/headerUser.php') ?>
     <main class="pt-16">
         <section id="accueil" class="relative bg-gradient-to-br from-primary via-purple-600 to-secondary text-white py-40 overflow-hidden">
             <div class="container mx-auto px-6 relative z-10">
@@ -45,7 +45,7 @@
                         </p>
                     </div>
                     <div class="md:w-1/2 relative"  >
-                        <img src="../image.png" width="20px" alt="Youdemy learning platform" class="rounded-lg shadow-2xl">
+                        <img src="image.png" width="20px" alt="Youdemy learning platform" class="rounded-lg shadow-2xl">
                         <div class="absolute -bottom-10 -left-10 bg-accent text-white p-6 rounded-lg shadow-lg transform rotate-3 animate-pulse">
                             <p class="font-bold text-2xl">+1000 cours</p>
                             <p class="text-lg">dans diverses catégories</p>
@@ -73,77 +73,37 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <!-- Course Card 1 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
+                <?php foreach ($courses as $course): ?>
+                <div class="bg-white rounded-xl h-fit shadow-lg overflow-hidden transform transition duration-300 hover:scale-105" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
                     <div class="relative">
-                        <img src="../image1.png" alt="Introduction à la programmation" class="w-full h-48 object-cover">
+                        <img src="./uploads/<?= htmlspecialchars($course['image_url']); ?>" alt="<?= htmlspecialchars($course['title']); ?>" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300" :class="{ 'opacity-100': hover }">
-                            <a href="#" class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">Voir le cours</a>
+                            <a href="./sign/signIn.php" class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">Voir le cours</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-center mb-4">
-                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Programmation</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded"> <?= htmlspecialchars($course['name']); ?></span>
                             <span class="text-gray-600">4.8 ⭐️</span>
                         </div>
-                        <h3 class="font-bold text-xl mb-2">Introduction à la programmation</h3>
-                        <p class="text-gray-600 mb-4">Apprenez les bases de la programmation avec ce cours complet pour débutants.</p>
+                        <h3 class="font-bold text-xl mb-2"><?= htmlspecialchars($course['title']); ?></h3>
+                        <!-- <p class="text-gray-600 mb-4"><?= htmlspecialchars($course['description']); ?></p> -->
                         <div class="flex justify-between items-center">
-                            <span class="text-primary font-bold">39,99 €</span>
-                            <a href="#" class="text-white bg-primary px-4 py-2 rounded-full hover:bg-primary-dark transition duration-300">En savoir plus</a>
+                            <span class="text-primary font-bold"><?= htmlspecialchars($course['price']); ?> €</span>
+                            <!-- <a href="course.php?id=<?= $course['id']; ?>" class="text-white bg-primary px-4 py-2 rounded-full hover:bg-primary-dark transition duration-300">En savoir plus</a> -->
                         </div>
                     </div>
                 </div>
-                 <!-- Course Card 2 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
-                    <div class="relative">
-                        <img src="../image.png" alt="Design UX/UI avancé" class="w-full h-48 object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300" :class="{ 'opacity-100': hover }">
-                            <a href="#" class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">Voir le cours</a>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-pink-100 text-pink-800 text-xs font-semibold px-2.5 py-0.5 rounded">Design</span>
-                            <span class="text-gray-600">4.9 ⭐️</span>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">Design UX/UI avancé</h3>
-                        <p class="text-gray-600 mb-4">Maîtrisez les techniques avancées de design d'interface utilisateur.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-primary font-bold">59,99 €</span>
-                            <a href="#" class="text-white bg-primary px-4 py-2 rounded-full hover:bg-primary-dark transition duration-300">En savoir plus</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Course Card 3 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
-                    <div class="relative">
-                        <img src="../image2.png" alt="Marketing digital" class="w-full h-48 object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300" :class="{ 'opacity-100': hover }">
-                            <a href="#" class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">Voir le cours</a>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Marketing</span>
-                            <span class="text-gray-600">4.7 ⭐️</span>
-                        </div>
-                        <h3 class="font-bold text-xl mb-2">Marketing digital</h3>
-                        <p class="text-gray-600 mb-4">Découvrez les stratégies efficaces pour promouvoir votre entreprise en ligne.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-primary font-bold">49,99 €</span>
-                            <a href="#" class="text-white bg-primary px-4 py-2 rounded-full hover:bg-primary-dark transition duration-300">En savoir plus</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 flex justify-center">
-                <nav class="inline-flex rounded-md shadow" aria-label="Pagination">
-                    <a href="#" class="px-4 py-2 rounded-l-md bg-white text-gray-700 hover:bg-gray-50 transition duration-300">Précédent</a>
-                    <a href="#" class="px-4 py-2 bg-primary text-white hover:bg-primary-dark transition duration-300">1</a>
-                    <a href="#" class="px-4 py-2 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">2</a>
-                    <a href="#" class="px-4 py-2 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">3</a>
-                    <a href="#" class="px-4 py-2 rounded-r-md bg-white text-gray-700 hover:bg-gray-50 transition duration-300">Suivant</a>
-                </nav>
+                <?php endforeach; ?>
+                <!-- <div class="mt-12 flex justify-center">
+                    <nav class="inline-flex rounded-md shadow" aria-label="Pagination">
+                        <a href="#" class="px-4 py-2 rounded-l-md bg-white text-gray-700 hover:bg-gray-50 transition duration-300">Précédent</a>
+                        <a href="#" class="px-4 py-2 bg-primary text-white hover:bg-primary-dark transition duration-300">1</a>
+                        <a href="#" class="px-4 py-2 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">2</a>
+                        <a href="#" class="px-4 py-2 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">3</a>
+                        <a href="#" class="px-4 py-2 rounded-r-md bg-white text-gray-700 hover:bg-gray-50 transition duration-300">Suivant</a>
+                    </nav>
+                </div>  -->
             </div>
         </section>
 
@@ -177,6 +137,6 @@
         </section>
 
     </main>
-    <?php include('./include/footerUser.php') ?>
+    <?php include('./views/include/footerUser.php') ?>
 </body>
 </html>

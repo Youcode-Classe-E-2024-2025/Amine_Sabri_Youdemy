@@ -2,18 +2,22 @@
 include_once('./controller/userController.php');
 include_once('./controller/authController.php');
 include_once('./controller/categorieController.php');
+include_once('./controller/coursController.php');
+
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
 } else {
-    header('Location: views/guest.php');
+    header('Location: index.php?action=afficheCours');
+    exit;
 }
 
 $controller = new UserController();
+$cours = new CourseController();
 $categories = new CategoryController();
 $con = new AuthController();
 
 switch ($action) {
-    case 'regester':
+    case 'register': // Corrigé de 'regester'
         $controller->create();
         break;
     case 'connexion':
@@ -25,15 +29,19 @@ switch ($action) {
     case 'updateStatus':
         $controller->updateStatus();
         break;
-    case 'createCategories';
+    case 'createCategories':
         $categories->createCategory();
         break;
-    case 'editCategories';
+    case 'editCategories':
         $categories->updateCategory();
         break;
-    case 'deleteCategories';
+    case 'deleteCategories':
         $categories->deleteCategory();
         break;
+    case 'afficheCours':
+        $cours->index();
+        break;
+    default:
+        header('Location: index.php?action=afficheCours');
+        exit;
 }
-
-?>

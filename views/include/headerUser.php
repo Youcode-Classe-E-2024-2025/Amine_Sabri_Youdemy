@@ -14,14 +14,42 @@
                 <a href="#catalogue" class="text-gray-600 hover:text-primary transition duration-300">Catalogue</a>
                 <a href="#service" class="text-gray-600 hover:text-primary transition duration-300">Service</a>
             </div>
-            <div class="hidden md:flex items-center space-x-4">
-                <a href="./views/sign/signIn.php" class="text-primary hover:text-primary-dark transition duration-300">Connexion</a>
-                <a href="./views/sign/signUp.php" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition duration-300 transform hover:scale-105">S'inscrire</a>
-            </div>
-            <button @click="mobileMenu = !mobileMenu" class="md:hidden text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu">
+            <?php if(isset($_SESSION['username'])): ?>
+                <div class="relative hidden md:block">
+                    <button @click="mobileMenu = !mobileMenu" class="flex items-center space-x-2 text-gray-600 hover:text-primary">
+                        <span><?php echo $_SESSION['username']; ?></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" class="absolute right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg w-48">
+                        <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-200">Profil</a>
+                        <form action="index.php?action=logout" method="POST" class="block">
+                            <input type="hidden" name="name">
+                            <button type="submit" class="w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left">
+                                Déconnexion
+                            </button>
+                        </form>   
+                    </div>
+                </div>
+            <?php else: ?>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="./views/sign/signIn.php" class="text-primary hover:text-primary-dark transition duration-300">Connexion</a>
+                    <a href="./views/sign/signUp.php" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-primary-dark transition duration-300 transform hover:scale-105">S'inscrire</a>
+                </div>
+            <?php endif; ?>
+            
+            <button @click="mobileMenu = !mobileMenu" class="md:hidden flex space-x-3 text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu">
+            <?php if(isset($_SESSION['username'])): ?>
+                <span><?php echo $_SESSION['username']; ?></span>
                 <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
                     <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
                 </svg>
+            <?php else: ?>
+                <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
+                    <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                </svg>
+            <?php endif; ?>
             </button>
         </div>
     </nav>
@@ -29,7 +57,14 @@
         <a href="#accueil" class="block py-2 px-4 text-sm hover:bg-gray-200">Accueil</a>
         <a href="#catalogue" class="block py-2 px-4 text-sm hover:bg-gray-200">Catalogue</a>
         <a href="#service" class="block py-2 px-4 text-sm hover:bg-gray-200">Service</a>
-        <a href="./views/sign/signIn.php" class="block py-2 px-4 text-sm hover:bg-gray-200">Connexion</a>
-        <a href="./views/sign/signUp.php" class="block py-2 px-4 text-sm bg-primary text-white hover:bg-primary-dark">S'inscrire</a>
+        <?php if(isset($_SESSION['username'])): ?>
+            <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-200">Profil</a>
+            <form action="index.php?action=logout" method="POST" class="block">
+                <input type="hidden" name="name">
+                <button type="submit" class="w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left">
+                    Déconnexion
+                </button>
+            </form>
+        <?php endif; ?>
     </div>
 </header>

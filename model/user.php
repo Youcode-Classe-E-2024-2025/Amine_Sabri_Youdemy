@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../config/database.php';
 class User {
     private $id;
     private $username;
@@ -7,10 +7,11 @@ class User {
     private $password;
     private $role_id;
     private $status;
-    private $db; 
+    private $db;
 
-    public function __construct($db, $username = null, $email = null, $password = null, $role_id = null, $status = null) {
-        $this->db = $db;
+    public function __construct($username = null, $email = null, $password = null, $role_id = null, $status = null) {
+        $database = new Database();
+        $this->db = $database->getConnection();
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
@@ -18,19 +19,68 @@ class User {
         $this->status = $status;
     }
 
-    public static function getAll($db) {
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function setUsername($username) {
+        $this->username = $username;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function setPassword($password) {
+        $this->password = $password;
+    }
+
+    public function getRoleId() {
+        return $this->role_id;
+    }
+
+    public function setRoleId($role_id) {
+        $this->role_id = $role_id;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+
+
+    public function getAll() {
         $query = "SELECT * FROM users";
-        $stmt = $db->query($query);
+        $stmt = $this->db->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getUserById($db, $id) {
+    public function getUserById($id) {
         $query = "SELECT * FROM users WHERE id = ?";
-        $stmt = $db->prepare($query);
-        $stmt->execute([$id]); 
-        return $stmt->fetch(PDO::FETCH_ASSOC); 
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    
 
     public function create() {
         if ($this->role_id == '3') {
@@ -41,7 +91,7 @@ class User {
             $query = "INSERT INTO users (username, email, password, role_id) VALUES (:username, :email, :password, :role_id)";
             $stmt = $this->db->prepare($query);
         }
-    
+
         $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':password', $this->password);
@@ -49,7 +99,7 @@ class User {
         return $stmt->execute();
     }
 
-    public function findByEmail($email,$password) {
+    public function findByEmail($email, $password) {
         $query = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':email', $email);
@@ -57,15 +107,14 @@ class User {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) {
             if (password_verify($password, $user['password'])) {
-                return $user; 
+                return $user;
             } else {
-                return false; 
+                return false;
             }
         }
     }
 
-
-    public static function getAllWithRoles($db) {
+    public function getAllWithRoles() {
         $sql = "SELECT 
                     users.id,
                     users.username,
@@ -76,42 +125,37 @@ class User {
                 FROM users
                 INNER JOIN roles ON users.role_id = roles.id
                 ORDER BY users.created_at DESC";
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function updateStatus($db, $userId, $status) {
+    public function updateStatus($userId, $status) {
         $sql = "UPDATE users SET status = :status WHERE id = :id";
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':status', $status);
         $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
         return $stmt->execute();
     }
 
-
-    public static function countAllUsers($db) {
+    public function countAllUsers() {
         $sql = "SELECT COUNT(*) AS total FROM users";
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
-    
-    public static function readAllPaginated($db, $page, $resultsPerPage) {
+
+    public function readAllPaginated($page, $resultsPerPage) {
         $offset = ($page - 1) * $resultsPerPage;
-        $sql = "SELECT u.id, u.username, u.email, u.status, u.created_at ,r.name AS role 
+        $sql = "SELECT u.id, u.username, u.email, u.status, u.created_at, r.name AS role 
                 FROM users u
                 INNER JOIN roles r ON u.role_id = r.id
                 LIMIT :offset, :resultsPerPage";
-        $stmt = $db->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->bindValue(':resultsPerPage', $resultsPerPage, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    
-    
 }
-
 ?>

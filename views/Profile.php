@@ -28,18 +28,19 @@
         <section class="bg-white rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Mes Cours</h2>
 
+            <!-- <?php var_dump($courses) ?> -->
             <?php if (!empty($courses)): ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <?php foreach ($courses as $course): ?>
                         <div class="bg-gray-100 rounded-lg shadow-md p-4">
-                            <h3 class="text-xl font-bold text-gray-800"><?php echo $course['course_title']; ?></h3>
+                            <h3 class="text-xl font-bold text-gray-800"><?php echo $course['title']; ?></h3>
                             <p class="text-gray-600 mt-2">
-                                <strong>Description :</strong> <?php echo $course['course_description']; ?>
+                                <strong>Description :</strong> <?php echo $course['image_url']; ?>
                             </p>
-                            <p class="text-gray-600 mt-2">
-                                <strong>Catégorie :</strong> <?php echo $course['category_name']; ?>
-                            </p>
-                            <a href="index.php?action=showCourse&id=<?php echo$course['id']; ?>" 
+                            <!-- <p class="text-gray-600 mt-2">
+                                <strong>Catégorie :</strong> <?php echo $course['']; ?>
+                            </p> -->
+                            <a href="index.php?action=showCourse&id=<?php echo $course['id']; ?>" 
                                 class="inline-block mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
                                 Voir le cours
                             </a>

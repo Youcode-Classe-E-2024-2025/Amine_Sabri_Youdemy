@@ -19,11 +19,11 @@ $con = new AuthController();
 $coursUser = new UserCoursController();
 
 switch ($action) {
-    case 'register': // Corrigé de 'regester'
+    case 'register': 
         $controller->create();
         break;
-    case 'showProfil': // Corrigé de 'regester'
-        $controller->show();
+    case 'showProfil':
+        $controller->showProfile();
         break;
     case 'connexion':
         $con->connexion();

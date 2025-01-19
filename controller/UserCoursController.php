@@ -8,6 +8,18 @@ class UserCoursController {
         $this->userCoursModel = new UserCours();
     }
 
+    // public function showCours() {
+    //     if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    //         $user_id = $_GET['id']; 
+    //         $courses = $this->userCoursModel->getCoursesForUser($user_id);
+    //         // $cours = $courses->fetchAll(PDO::FETCH_ASSOC);
+    //         if($courses) {
+    //             include __DIR__ . '/../views/Profile.php';
+    //         } 
+    //     }
+    // }
+    
+
     public function assignCourseToUser() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user_id = $_POST["user_id"];
@@ -33,5 +45,6 @@ class UserCoursController {
     }
 }
 
-
+// $cou = new UserCoursController();
+// $cou->showCours(3);
 ?>

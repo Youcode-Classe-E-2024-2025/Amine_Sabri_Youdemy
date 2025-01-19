@@ -33,7 +33,7 @@ if (isset($_SESSION['message'])) {
     <div class="container  mx-auto mt-14 max-w-md bg-gray-200 p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl text-center font-bold mb-5 text-blue-500">Créer un compte</h1>
 
-        <form id="registerForm" action="../../index.php?action=regester" method="POST">
+        <form id="registerForm" action="../../index.php?action=register" method="POST">
             <div class="grid grid-cols-2 gap-x-4 ">
                 <div class="mb-2">
                     <label for="username" class="block text-blue-500 font-bold mb-2 text-sm">Nom d'utilisateur:</label>

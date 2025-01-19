@@ -20,20 +20,34 @@ class Course{
         $this->db = $database->getConnection();
     }
 
-    public function create(){
-        $sql = "INSERT INTO courses (title, description, video_url, image_url, document_url, category_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $this->db->prepare($sql);
-        $coures = $stmt->execute([
-            $this->title, 
-            $this->description, 
-            $this->videoUrl, 
-            $this->imageUrl, 
-            $this->documentUrl, 
-            $this->categoryId, 
-            $this->price
-        ]);
-        return $coures;
+    public function create($tags)
+{
+    $this->db->beginTransaction();
+
+
+    $sql = "INSERT INTO courses (title, description, video_url, image_url, document_url, category_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([
+        $this->title,
+        $this->description,
+        $this->videoUrl,
+        $this->imageUrl,
+        $this->documentUrl,
+        $this->categoryId,
+        $this->price,
+    ]);
+    $courseId = $this->db->lastInsertId();
+    $sqlTags = "INSERT INTO course_tag (course_id, tag_id) VALUES (?, ?)";
+    $stmtTags = $this->db->prepare($sqlTags);
+
+    foreach ($tags as $tagId) {
+        $stmtTags->execute([$courseId, $tagId]);
     }
+    $this->db->commit();
+
+    return $courseId;
+}
+
 
     public function readAll($limit, $offset)
 {

@@ -39,7 +39,8 @@ class CourseController
     public function show($id)
     {
         $course = $this->courseModel->readOne($id);
-        include '../views/courses/show.php';
+        // var_dump($course)
+        include __DIR__ . '/../views/detailCours.php';  
     }
 
     public function create()
@@ -102,5 +103,8 @@ class CourseController
         }
     }
 }
+
+// $show = new CourseController();
+// $show->show(20);
 ?>
 

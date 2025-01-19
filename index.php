@@ -41,6 +41,9 @@ switch ($action) {
     case 'afficheCours':
         $cours->index();
         break;
+    case 'showCourse':
+        $cours->show($_GET['id']);
+        break;
     default:
         header('Location: index.php?action=afficheCours');
         exit;

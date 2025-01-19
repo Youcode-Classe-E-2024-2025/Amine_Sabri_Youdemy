@@ -109,7 +109,8 @@ class Course{
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$id]);
         $cours = $stmt->fetch(PDO::FETCH_ASSOC);
-        var_dump($cours);
+        return $cours;
+        // var_dump($cours);
     }
 
 

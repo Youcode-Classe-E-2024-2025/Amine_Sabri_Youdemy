@@ -46,7 +46,7 @@
                         </p>
                     </div>
                     <div class="md:w-1/2 relative"  >
-                        <img src="image.png" width="20px" alt="Youdemy learning platform" class="rounded-lg shadow-2xl">
+                        <img src="./uploads/image.png" width="20px" alt="Youdemy learning platform" class="rounded-lg shadow-2xl">
                         <div class="absolute -bottom-10 -left-10 bg-accent text-white p-6 rounded-lg shadow-lg transform rotate-3 animate-pulse">
                             <p class="font-bold text-2xl">+1000 cours</p>
                             <p class="text-lg">dans diverses catégories</p>
@@ -80,7 +80,10 @@
                         <img src="./uploads/<?= htmlspecialchars($course['image_url']); ?>" alt="<?= htmlspecialchars($course['title']); ?>" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity duration-300" :class="{ 'opacity-100': hover }">
                             <?php if(isset($_SESSION['username'])): ?>
-                                <a href="views/detailCours.php?id=<?= $course['id']; ?>" class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">Voir le cours</a>
+                                <a href="index.php?action=showCourse&id=<?= $course['id']; ?>" 
+                                    class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">
+                                    Voir le cours
+                                </a>                            
                             <?php else: ?>
                                 <a href="./views/sign/signIn.php" class="bg-white text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition duration-300">Voir le cours</a>
                             <?php endif; ?>

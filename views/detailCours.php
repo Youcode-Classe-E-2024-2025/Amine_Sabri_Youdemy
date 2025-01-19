@@ -24,7 +24,7 @@
                         class="w-full h-[500px] rounded-lg" 
                         controls 
                         preload="auto">
-                        <source src="../uploads/<?php echo htmlspecialchars($course['video_url']); ?>" type="video/mp4">
+                        <source src="./uploads/<?php echo htmlspecialchars($course['video_url']); ?>" type="video/mp4">
                     </video>
             </div>
         </section>

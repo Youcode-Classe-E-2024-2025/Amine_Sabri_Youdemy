@@ -17,6 +17,20 @@ class UserCoursController {
             exit; 
         }
     }
+
+    public function removeCourseFromUser($user_id, $cours_id) {
+        if ($this->userCoursModel->removeCourseFromUser($user_id, $cours_id)) {
+            echo "Course removed successfully.";
+        } else {
+            echo "Failed to remove course.";
+        }
+    }
+
+
+    public function getUserCourses($user_id) {
+        $courses = $this->userCoursModel->getUserCourses($user_id);
+        return $courses;
+    }
 }
 
 

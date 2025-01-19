@@ -33,6 +33,14 @@ class UserCours {
         $stmt->bindParam(':cours_id', $cours_id);
         return $stmt->execute();
     }
+
+    public function removeCourseFromUser($user_id, $cours_id) {
+        $query = "DELETE FROM user_cours WHERE user_id = :user_id AND cours_id = :cours_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':cours_id', $cours_id);
+        return $stmt->execute();
+    }
 }
 
 ?>

@@ -49,6 +49,9 @@ switch ($action) {
     case 'afficheCours':
         $cours->index();
         break;
+    case 'deleteCours':
+        $cours->delete();
+        break;
     case 'afficherCours':
         $cours->afficherCours();
         break;

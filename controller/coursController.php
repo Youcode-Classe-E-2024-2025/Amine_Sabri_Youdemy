@@ -90,13 +90,16 @@ class CourseController
         include '../views/courses/create.php';
     }
 
-    public function delete($id)
-    {
-        if ($this->courseModel->delete($id)) {
-            header("Location: index.php");
-            exit;
-        } else {
-            echo "Erreur lors de la suppression du cours.";
+    public function delete(){
+        if($_SERVER["REQUEST_METHOD"] === "GET"){
+            $id = $_GET['id'];
+            $cours = $this->courseModel->delete($id);
+            if ($cours) {
+                header("Location: index.php?action=afficherCours");
+                exit;
+            } else {
+                echo "Erreur lors de la suppression du cours.";
+            }
         }
     }
 }

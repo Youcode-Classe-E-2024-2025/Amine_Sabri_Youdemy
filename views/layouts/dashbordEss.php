@@ -50,8 +50,8 @@
                       <td class="py-2 px-4 text-gray-700"><?= htmlspecialchars($course['name']) ?></td>
                       <td class="py-2 px-4 text-gray-700"><?= htmlspecialchars($course['tags']) ?></td>
                       <td class="py-2 px-4 text-gray-700">
-                          <a href="/modifierCours?id=<?= $course['id'] ?>" class="bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600">Modifier</a>
-                          <a href="/supprimerCours?id=<?= $course['id'] ?>" class="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600">Supprimer</a>
+                          <a href="index.php?action=deleteCours&id=<?= $course['id'] ?>" class="bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600">Modifier</a>
+                          <a href="index.php?action=deleteCours&id=<?= $course['id'] ?>" class="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600">Supprimer</a>
                       </td>
                   </tr>
               <?php endforeach; ?>

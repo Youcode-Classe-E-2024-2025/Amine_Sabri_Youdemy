@@ -24,6 +24,14 @@ class User {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getUserById($db, $id) {
+        $query = "SELECT * FROM users WHERE id = ?";
+        $stmt = $db->prepare($query);
+        $stmt->execute([$id]); 
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
+    }
+    
+
     public function create() {
         if ($this->role_id == '3') {
             $query = "INSERT INTO users (username, email, password, role_id, status) VALUES (:username, :email, :password, :role_id, :status)";

@@ -13,6 +13,16 @@ class UserController {
     public function index() {
         return User::getAllWithRoles($this->db); 
     }
+    
+    public function show() {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+            $id = $_GET["id"];
+            $student = User::getUserById($this->db, $id);
+            if($student){
+                include __DIR__ . '/../views/Profile.php';
+            }
+        }
+    }
 
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -74,6 +84,6 @@ class UserController {
 }
 
 // $controller = new UserController();
-// $controller->updateStatus();
+// $controller->show(3);
 
 ?>

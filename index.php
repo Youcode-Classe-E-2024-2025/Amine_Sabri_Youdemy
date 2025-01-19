@@ -22,6 +22,9 @@ switch ($action) {
     case 'register': // Corrigé de 'regester'
         $controller->create();
         break;
+    case 'showProfil': // Corrigé de 'regester'
+        $controller->show();
+        break;
     case 'connexion':
         $con->connexion();
         break;

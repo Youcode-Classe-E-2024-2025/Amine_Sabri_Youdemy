@@ -23,8 +23,8 @@
                         </svg>
                     </button>
                     <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" class="absolute right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg w-48">
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-200">Profil</a>
-                        <form action="index.php?action=logout" method="POST" class="block">
+                    <a href="./index.php?action=showProfil&id=<?php echo $_SESSION['user_id']; ?>" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-200">Profil</a>
+                    <form action="index.php?action=logout" method="POST" class="block">
                             <input type="hidden" name="name">
                             <button type="submit" class="w-full px-4 py-2 text-gray-700 hover:bg-gray-100 text-left">
                                 Déconnexion

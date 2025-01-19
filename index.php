@@ -3,6 +3,7 @@ include_once('./controller/userController.php');
 include_once('./controller/authController.php');
 include_once('./controller/categorieController.php');
 include_once('./controller/coursController.php');
+include_once('./controller/UserCoursController.php');
 
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
@@ -15,6 +16,7 @@ $controller = new UserController();
 $cours = new CourseController();
 $categories = new CategoryController();
 $con = new AuthController();
+$coursUser = new UserCoursController();
 
 switch ($action) {
     case 'register': // Corrigé de 'regester'
@@ -43,6 +45,9 @@ switch ($action) {
         break;
     case 'showCourse':
         $cours->show($_GET['id']);
+        break;
+    case 'InscriptionCourse':
+        $coursUser->assignCourseToUser();
         break;
     default:
         header('Location: index.php?action=afficheCours');

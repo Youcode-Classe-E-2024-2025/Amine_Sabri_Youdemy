@@ -69,6 +69,21 @@
                             </svg>
                             Télécharger le document
                         </a>
+                        <form method="POST" action="index.php?action=InscriptionCourse" class="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">
+                            <div class="mb-4">
+                                <input type="hidden" id="user_id" name="user_id" value="<?php echo $_SESSION['user_id']?>">
+                            </div>
+
+                            <div class="mb-4">
+                                <input type="hidden" id="cours_id" name="cours_id" value="<?php echo $course['course_id']?>">                            </div>
+                            <div class="flex justify-center mt-6">
+                                <button type="submit" class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    Inscription à un cours
+                                </button>
+                            </div>
+                        </form>
+
+
                     </div>
                 <?php else: ?>
                     <p class="text-gray-600 mt-4">Aucun document disponible pour ce cours.</p>

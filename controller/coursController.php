@@ -12,23 +12,26 @@ class CourseController
 
     public function index()
     {
+        // Nombre d'éléments par page
         $perPage = 3;
+    
+        // Obtenir la page actuelle depuis l'URL, par défaut 1
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+    
+        // Calculer l'offset
         $offset = ($page - 1) * $perPage;
+    
+        // Récupérer les cours avec pagination
         $courses = $this->courseModel->readAll($perPage, $offset);
+    
+        // Obtenir le nombre total de cours
         $totalCourses = $this->courseModel->countCourses();
+    
+        // Calculer le nombre total de pages
         $totalPages = ceil($totalCourses / $perPage);
+    
+        // Inclure la vue avec les données
         include __DIR__ . '/../views/guest.php';
-    }
-    public function afficherCours()
-    {
-        $perPage = 3;
-        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
-        $offset = ($page - 1) * $perPage;
-        $courses = $this->courseModel->readAll($perPage, $offset);
-        $totalCourses = $this->courseModel->countCourses();
-        $totalPages = ceil($totalCourses / $perPage);
-        include __DIR__ . '/../views/layouts/dashbordEss.php';
     }
     
     
@@ -47,7 +50,6 @@ class CourseController
             $description = $_POST['description'];
             $category_id = intval($_POST['category_id']);
             $price = floatval($_POST['price']);
-            $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
 
             $targetDir = "../uploads/";
             $imageFileName = null;
@@ -79,9 +81,9 @@ class CourseController
             $this->courseModel->setDocumentUrl($documentFileName);
             $this->courseModel->setCategoryId($category_id);
             $this->courseModel->setPrice($price);
-            $cours = $this->courseModel->create($tags);
+            $cours = $this->courseModel->create();
             if($cours) {
-                header("Location: index.php?action=afficherCours");
+                header("Location: index.php");
                 exit;
             } else {
                 echo "Erreur lors de la création du cours.";
@@ -91,16 +93,13 @@ class CourseController
         include '../views/courses/create.php';
     }
 
-    public function delete(){
-        if($_SERVER["REQUEST_METHOD"] === "GET"){
-            $id = $_GET['id'];
-            $cours = $this->courseModel->delete($id);
-            if ($cours) {
-                header("Location: index.php?action=afficherCours");
-                exit;
-            } else {
-                echo "Erreur lors de la suppression du cours.";
-            }
+    public function delete($id)
+    {
+        if ($this->courseModel->delete($id)) {
+            header("Location: index.php");
+            exit;
+        } else {
+            echo "Erreur lors de la suppression du cours.";
         }
     }
 }

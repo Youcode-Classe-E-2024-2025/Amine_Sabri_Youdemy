@@ -31,7 +31,7 @@ class AuthController {
                 }elseif($user['role_id'] == "1" && $user['status'] == "actif"){
                     header('Location: views/layouts/dashbord.php?page=users');
                 }elseif($user['role_id'] == "2" && $user['status'] == "actif"){
-                    header('Location: index.php?action=afficherCours');
+                    header('Location: views/layouts/dashbordEss.php');
                 }
                 exit();
             } else {

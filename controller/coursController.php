@@ -12,26 +12,23 @@ class CourseController
 
     public function index()
     {
-        // Nombre d'éléments par page
         $perPage = 3;
-    
-        // Obtenir la page actuelle depuis l'URL, par défaut 1
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
-    
-        // Calculer l'offset
         $offset = ($page - 1) * $perPage;
-    
-        // Récupérer les cours avec pagination
         $courses = $this->courseModel->readAll($perPage, $offset);
-    
-        // Obtenir le nombre total de cours
         $totalCourses = $this->courseModel->countCourses();
-    
-        // Calculer le nombre total de pages
         $totalPages = ceil($totalCourses / $perPage);
-    
-        // Inclure la vue avec les données
         include __DIR__ . '/../views/guest.php';
+    }
+    public function afficherCours()
+    {
+        $perPage = 3;
+        $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $perPage;
+        $courses = $this->courseModel->readAll($perPage, $offset);
+        $totalCourses = $this->courseModel->countCourses();
+        $totalPages = ceil($totalCourses / $perPage);
+        include __DIR__ . '/../views/layouts/dashbordEss.php';
     }
     
     
@@ -83,7 +80,7 @@ class CourseController
             $this->courseModel->setPrice($price);
             $cours = $this->courseModel->create();
             if($cours) {
-                header("Location: index.php");
+                header("Location: index.php?action=afficherCours");
                 exit;
             } else {
                 echo "Erreur lors de la création du cours.";

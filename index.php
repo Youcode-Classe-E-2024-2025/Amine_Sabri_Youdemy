@@ -43,8 +43,14 @@ switch ($action) {
     case 'deleteCategories':
         $categories->deleteCategory();
         break;
+    case 'createCours':
+        $cours->create();
+        break;
     case 'afficheCours':
         $cours->index();
+        break;
+    case 'afficherCours':
+        $cours->afficherCours();
         break;
     case 'showCourse':
         $cours->show($_GET['id']);

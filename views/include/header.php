@@ -4,7 +4,7 @@
         <div class="flex items-center space-x-4">
             <div class="relative">
                 <button class="flex items-center space-x-2 px-2 rounded-3xl bg-gray-800 text-white">
-                    <span><?= $_SESSION['username']?></span>
+                    <span><?= $_SESSION['username'] ?? ''?></span>
                     <i class="bi bi-person-fill"></i>
                 </button>
                 <div class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-200 hidden group-hover:block">

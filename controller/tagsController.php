@@ -17,15 +17,15 @@ class TagController {
         }
     }
     
-    public function getById($id) {
-        $result = $this->modelTag->findById($id);
-        if ($result) {
-            // var_dump($result);
-            return ['success' => true, 'data' => $result];
-        } else {
-            return ['success' => false, 'message' => 'Tag not found.'];
-        }
-    }
+    // public function getById($id) {
+    //     $result = $this->modelTag->findById($id);
+    //     if ($result) {
+    //         // var_dump($result);
+    //         return ['success' => true, 'data' => $result];
+    //     } else {
+    //         return ['success' => false, 'message' => 'Tag not found.'];
+    //     }
+    // }
     
     public function update($id, $name) {
         $this->modelTag->setId($id);
@@ -48,15 +48,15 @@ class TagController {
         }
     }
     
-    public function getAll() {
-        $result = $this->modelTag->findAll();
-        if ($result) {
-           var_dump($result);
-            return ['success' => true, 'data' => $result];
-        } else {
-            return ['success' => false, 'message' => 'No tags found.'];
-        }
-    }
+    // public function getAll() {
+    //     $result = $this->modelTag->findAll();
+    //     if ($result) {
+    //        var_dump($result);
+    //         return ['success' => true, 'data' => $result];
+    //     } else {
+    //         return ['success' => false, 'message' => 'No tags found.'];
+    //     }
+    // }
 
 
     public function getPaginatedTags($page, $resultsPerPage) {

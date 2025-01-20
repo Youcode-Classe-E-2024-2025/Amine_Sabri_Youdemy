@@ -228,6 +228,47 @@ public function countCourses($user_id) {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    public static function countUsersInCoursesByUser($user_id) {
+        $database = new Database();
+        $db = $database->getConnection();
+        $sql = "
+            SELECT 
+                COUNT(*) AS total_courses
+            FROM 
+                courses
+            WHERE 
+                created_by = :user_id
+        ";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['total_courses'] : 0;
+    }
+    
+    public static function countUsersInCoursesByCreator($user_id) {
+        $database = new Database();
+        $db = $database->getConnection();
+        $sql = "
+            SELECT 
+                COUNT(DISTINCT uc.user_id) AS total_users
+            FROM 
+                user_cours uc
+            JOIN 
+                courses c ON uc.cours_id = c.id
+            WHERE 
+                c.created_by = :user_id
+        ";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['total_users'] : 0;
+    }
+    
+    
+
     // Getters and setters...
 
     public function getTitle()

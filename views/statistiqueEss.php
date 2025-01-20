@@ -1,3 +1,4 @@
+<?php require_once '../model/cours.php'?>
 <?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,17 +34,22 @@
       </div>
     </div>
   </header>
+
+  <?php 
+    $user_id = $_SESSION['user_id'];
+    $totalCours = Course::countUsersInCoursesByUser($user_id);
+    $totalUserIscris = Course::countUsersInCoursesByCreator($user_id)?>
     <section class="p-6 bg-gray-100">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-2xl font-bold mb-6 text-gray-700">Statistiques des Cours</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="p-6 bg-white shadow-md rounded-lg">
                     <h3 class="text-lg font-semibold text-gray-700">Total des Cours</h3>
-                    <p class="text-4xl font-bold text-indigo-500 mt-4">66</p>
+                    <p class="text-4xl font-bold text-indigo-500 mt-4"><?= $totalCours ?></p>
                 </div>
                 <div class="p-6 bg-white shadow-md rounded-lg">
                     <h3 class="text-lg font-semibold text-gray-700">Utilisateurs Inscrits</h3>
-                    <p class="text-4xl font-bold text-indigo-500 mt-4">77</p>
+                    <p class="text-4xl font-bold text-indigo-500 mt-4"><?= $totalUserIscris ?></p>
                 </div>
             </div>
         </div>
@@ -61,8 +67,8 @@
         });
     </script>
     <script>
-        var xValues = ["Italy", "France"];
-        var yValues = [55, 49];
+        var xValues = ["cours", "users"];
+        var yValues = [<?= $totalCours ?>, <?= $totalUserIscris ?>];
         var barColors = [
         "#b91d47",
         "#00aba9"

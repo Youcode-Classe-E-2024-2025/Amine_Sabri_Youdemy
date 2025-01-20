@@ -49,8 +49,7 @@ class Course{
     return $courseId;
 }
 
-    public function readAll($limit, $offset)
-{
+public function readAll($user_id, $limit, $offset) {
     $sql = "
         SELECT 
             c.id,
@@ -61,7 +60,7 @@ class Course{
             c.document_url,
             c.price,
             c.created_at,
-            cat.name ,
+            cat.name,
             GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
         FROM 
             courses c
@@ -71,6 +70,8 @@ class Course{
             course_tag ct ON c.id = ct.course_id
         LEFT JOIN 
             tags t ON ct.tag_id = t.id
+        WHERE
+            c.created_by = :user_id
         GROUP BY 
             c.id, cat.name
         ORDER BY 
@@ -79,6 +80,7 @@ class Course{
     ";
 
     $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->execute();
@@ -87,11 +89,14 @@ class Course{
 }
 
 
-    public function countCourses() {
-        $sql = "SELECT COUNT(*) AS total FROM courses";
-        $stmt = $this->db->query($sql);
-        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
-    }
+public function countCourses($user_id) {
+    $sql = "SELECT COUNT(*) AS total FROM courses WHERE created_by = :user_id";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+}
     
 
     public static function readOne($id)

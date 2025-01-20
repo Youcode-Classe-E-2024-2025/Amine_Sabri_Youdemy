@@ -277,6 +277,45 @@ public function countCourses($user_id) {
         return $result ? $result['total_courses'] : 0; // Retourne 0 si aucun résultat
     }
     
+    public function getCourseWithMostStudents() {
+        $sql = "
+            SELECT 
+                c.title AS course_title,
+                COUNT(uc.user_id) AS total_students
+            FROM 
+                courses c
+            LEFT JOIN 
+                user_cours uc ON c.id = uc.cours_id
+            GROUP BY 
+                c.id
+            ORDER BY 
+                total_students DESC
+            LIMIT 1
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getCourseByCategory() {
+        $sql = "
+            SELECT 
+                cat.name AS category_name,
+                COUNT(c.id) AS total_courses
+            FROM 
+                courses c
+            LEFT JOIN 
+                categories cat ON c.category_id = cat.id
+            GROUP BY 
+                cat.name
+            ORDER BY 
+                total_courses DESC
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     
     
 

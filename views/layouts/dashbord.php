@@ -1,6 +1,7 @@
 <?php require_once __DIR__ . "/../../controller/categorieController.php" ?>
 <?php require_once __DIR__ . "/../../controller/tagsController.php" ?>
 <?php require_once __DIR__ . "/../../controller/userController.php" ?>
+<?php require_once __DIR__ . "/../../controller/coursController.php" ?>
 <?php require_once __DIR__ . "/../../controller/authController.php" ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -67,7 +68,10 @@
                                 $currentPage = $paginationData['currentPage'];
                                 include('../tags.php');
                                 break;
-                                
+                            case 'statistiques';
+                                $show = new CourseController();
+                                $show->showCourseByCategory();
+                                break;
                             default:
                                 echo "<h2>Page non trouvée</h2>";
                         }

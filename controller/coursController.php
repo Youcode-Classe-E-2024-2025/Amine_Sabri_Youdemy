@@ -165,9 +165,14 @@ class CourseController
         return $users;
     }
 
+    public function showCourseByCategory() {
+        $coursbyCtegory = $this->courseModel->getCourseByCategory();        
+        include __DIR__ . '/../views/courseByCategory.php';
+    }
 }
 
 // $show = new CourseController();
+// $show->showCourseByCategory();
 // $show->afficherCours();
 // $show->showUsersByCreator();
 ?>

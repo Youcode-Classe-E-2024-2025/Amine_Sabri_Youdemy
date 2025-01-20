@@ -65,9 +65,11 @@ class Tag {
     }
 
     // Find all tags
-    public function findAll() {
+    public static function findAll() {
+        $database = new Database();
+        $db = $database->getConnection();
         $sql = "SELECT * FROM tags";
-        $stmt = $this->db->query($sql);
+        $stmt = $db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

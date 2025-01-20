@@ -35,9 +35,11 @@ class Category {
     }
 
     // Read
-    public function readAll() {
+    public static function readAll() {
+        $database = new Database();
+        $db = $database->getConnection();
         $query = "SELECT * FROM categories";
-        $stmt = $this->db->prepare($query);
+        $stmt = $db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

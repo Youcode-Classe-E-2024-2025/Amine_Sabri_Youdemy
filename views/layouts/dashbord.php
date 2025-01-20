@@ -21,8 +21,6 @@
             <?php include('../include/header.php') ?>
             
             <div class="p-6">
-                <!-- statistiques -->
-                <?php include('../statistiques.php') ?>
                 
                 <div class="p-6">
                 <?php
@@ -69,6 +67,8 @@
                                 include('../tags.php');
                                 break;
                             case 'statistiques';
+                                $cat = new CategoryController();
+                                $cat->showTotals();
                                 $show = new CourseController();
                                 $show->showCourseByCategory();
                                 break;

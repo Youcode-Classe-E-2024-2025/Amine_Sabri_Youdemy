@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
-class Category {
+require_once __DIR__ . '/../model/CountableEntity.php';
+class Category implements CountableEntity{
     private $id;
     private $name;
     private $db;
@@ -26,7 +27,12 @@ class Category {
         $this->name = $name;
     }
 
-
+    public function getTotalCount(): int {
+        $sql = "SELECT COUNT(*) AS total_categories FROM categories";
+        $stmt = $this->db->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total_categories'];
+    }
     public function create() {
         $query = "INSERT INTO categories (name) VALUES (:name)";
         $stmt = $this->db->prepare($query);

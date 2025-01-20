@@ -11,7 +11,6 @@
             <li><a href="dashbord.php?page=categories" class="block py-2 px-4 rounded hover:bg-gray-700">Categorey</a></li>
             <li><a href="dashbord.php?page=tags" class="block py-2 px-4 rounded hover:bg-gray-700">Tags</a></li>
             <li><a href="dashbord.php?page=statistiques" class="block py-2 px-4 rounded hover:bg-gray-700">Statistiques</a></li>
-            <li><a href="dashbord.php?page=cours" class="block py-2 px-4 rounded hover:bg-gray-700">Cours</a></li>
         </ul>
     </nav>
 </aside>

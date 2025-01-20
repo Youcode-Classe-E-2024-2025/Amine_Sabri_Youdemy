@@ -1,10 +1,14 @@
 <?php
 require_once __DIR__ . '/../model/categorie.php';
+require_once __DIR__ . '/../model/cours.php';
+require_once __DIR__ . '/../model/tags.php';
 class CategoryController {
     private $model;
 
     public function __construct() {
         $this->model = new Category();
+        $this->modelTags = new Tag();
+        $this->modecours = new Course();
     }
 
     public function createCategory() {
@@ -56,10 +60,17 @@ class CategoryController {
             'currentPage' => $page
         ];
     }
-    
+
+    public function showTotals() {
+        $totalCategories = $this->model->getTotalCount();
+        $totalTags = $this->modelTags->getTotalCount();
+        $totalCourses = $this->modecours->countTotalCourses();
+        include __DIR__ . '/../views/statistiques.php';
+    } 
 }
 
 // $cat = new CategoryController();
+// $cat->showTotals();
 
 // $cat->createCategory('correct category');
 // $cat->updateCategory(5,'modifier category');

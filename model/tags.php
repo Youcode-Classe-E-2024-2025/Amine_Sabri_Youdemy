@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../model/CountableEntity.php';
 
-class Tag {
+class Tag implements CountableEntity{
     private $id;
     private $name;
     private $db;
@@ -27,6 +28,13 @@ class Tag {
 
     public function setName($name) {
         $this->name = $name;
+    }
+
+    public function getTotalCount(): int {
+        $sql = "SELECT COUNT(*) AS total_tags FROM tags";
+        $stmt = $this->db->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int) $result['total_tags'];
     }
 
     // Create a new tag

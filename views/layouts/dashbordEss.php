@@ -1,6 +1,7 @@
 <?php require_once './model/tags.php'?>
 <?php require_once './model/categorie.php'?>
 <?php require_once './model/cours.php'?>
+<?php require_once './controller/coursController.php'?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -187,9 +188,37 @@
         </form>
 
     </section>
-    <section>
-      
-    </section>
+    <section class="p-6">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Utilisateurs Inscrits aux Cours</h2>
+    <?php 
+        $users = CourseController::showUsersByCreator();
+    ?>
+    <table class="min-w-full table-auto border-collapse border border-gray-200">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Username</th>
+                <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Email</th>
+                <th class="py-2 px-4 text-left text-sm font-medium text-gray-700">Course Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($users)): ?>
+                <?php foreach ($users as $user): ?>
+                    <tr class="border-t border-gray-200 hover:bg-gray-50">
+                        <td class="py-2 px-4 text-sm text-gray-700"><?= htmlspecialchars($user['username']) ?></td>
+                        <td class="py-2 px-4 text-sm text-gray-700"><?= htmlspecialchars($user['email']) ?></td>
+                        <td class="py-2 px-4 text-sm text-gray-700"><?= htmlspecialchars($user['course_title']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="3" class="py-2 px-4 text-center text-gray-500">Aucun utilisateur trouvé.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</section>
+
   </main>
 
   <script>

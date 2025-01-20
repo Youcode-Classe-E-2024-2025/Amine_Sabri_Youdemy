@@ -156,9 +156,18 @@ class CourseController
         // include '../views/courses/update.php';
     }
 
+    public static function showUsersByCreator() {
+        // session_start();
+        $creator_id = $_SESSION['user_id'];
+        $courseModel = new Course();
+        $users = $courseModel->getUsersByCourseCreator($creator_id);
+        return $users;
+    }
+
 }
 
 // $show = new CourseController();
 // $show->afficherCours();
+// $show->showUsersByCreator();
 ?>
 

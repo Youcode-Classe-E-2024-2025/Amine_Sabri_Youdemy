@@ -156,6 +156,28 @@ class Course{
         return $stmt->execute([$id]);
     }
 
+
+    public function getUsersByCourseCreator($creator_id) {
+        $query = "SELECT 
+                    u.username,
+                    u.email,
+                    c.title AS course_title
+                  FROM 
+                    user_cours uc
+                  JOIN 
+                    users u ON u.id = uc.user_id
+                  JOIN 
+                    courses c ON c.id = uc.cours_id
+                  WHERE 
+                    c.created_by = :creator_id";
+
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':creator_id', $creator_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Getters and setters...
 
     public function getTitle()

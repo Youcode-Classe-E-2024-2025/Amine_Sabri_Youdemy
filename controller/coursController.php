@@ -166,9 +166,11 @@ class CourseController
     }
 
     public function showCourseByCategory() {
-        $coursbyCtegory = $this->courseModel->getCourseByCategory();        
+        $coursbyCategory = $this->courseModel->getCourseByCategory();        
+        $courseWithMostStudents = $this->courseModel->getCourseWithMostStudents();
         include __DIR__ . '/../views/courseByCategory.php';
     }
+    
 }
 
 // $show = new CourseController();

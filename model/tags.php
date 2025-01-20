@@ -65,10 +65,10 @@ class Tag implements CountableEntity{
     }
 
     // Delete a tag by ID
-    public function delete() {
+    public function delete($id) {
         $sql = "DELETE FROM tags WHERE id = :id";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
 

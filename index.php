@@ -4,6 +4,7 @@ include_once('./controller/authController.php');
 include_once('./controller/categorieController.php');
 include_once('./controller/coursController.php');
 include_once('./controller/UserCoursController.php');
+include_once('./controller/tagsController.php');
 
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
@@ -17,6 +18,7 @@ $cours = new CourseController();
 $categories = new CategoryController();
 $con = new AuthController();
 $coursUser = new UserCoursController();
+$tags = new TagController();
 
 switch ($action) {
     case 'register': 
@@ -63,6 +65,9 @@ switch ($action) {
         break;
     case 'InscriptionCourse':
         $coursUser->assignCourseToUser();
+        break;
+    case 'deleteTags':
+        $tags->deletetags();
         break;
     default:
         header('Location: index.php?action=afficheCours');

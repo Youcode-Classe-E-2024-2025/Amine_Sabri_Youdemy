@@ -38,13 +38,11 @@ class TagController {
         }
     }
     
-    public function delete($id) {
-        $this->modelTag->setId($id);
-        
-        if ($this->modelTag->delete()) {
-            return ['success' => true, 'message' => 'Tag deleted successfully.'];
-        } else {
-            return ['success' => false, 'message' => 'Failed to delete tag.'];
+    public function deletetags() {
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $id = $_POST['id'];
+            $tag = $this->modelTag->delete($id);
+            header('Location: views/layouts/dashbord.php?page=tags');
         }
     }
     

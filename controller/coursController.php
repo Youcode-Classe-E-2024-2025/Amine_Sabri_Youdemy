@@ -15,7 +15,7 @@ class CourseController
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $perPage;
         $courses = $this->courseModel->readAll($perPage, $offset);
-        $totalCourses = $this->courseModel->countCourses();
+        $totalCourses = $this->courseModel->countCoursesGuest();
         $totalPages = ceil($totalCourses / $perPage);
         include __DIR__ . '/../views/guest.php';
     }
@@ -25,7 +25,7 @@ class CourseController
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $perPage;
         $user_id = $_SESSION['user_id'];
-        $courses = $this->courseModel->readAll($user_id,$perPage, $offset);
+        $courses = $this->courseModel->readAllByUser($user_id,$perPage, $offset);
         $totalCourses = $this->courseModel->countCourses($user_id);
         $totalPages = ceil($totalCourses / $perPage);
         include __DIR__ . '/../views/layouts/dashbordEss.php';

@@ -168,6 +168,7 @@ class CourseController
     public function showCourseByCategory() {
         $coursbyCategory = $this->courseModel->getCourseByCategory();        
         $courseWithMostStudents = $this->courseModel->getCourseWithMostStudents();
+        $TopTeachers = $this->courseModel->getTopTeachers();
         include __DIR__ . '/../views/courseByCategory.php';
     }
     

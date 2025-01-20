@@ -316,6 +316,26 @@ public function countCourses($user_id) {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function getTopTeachers() {
+        $sql = "
+            SELECT 
+                u.username AS teacher_name,
+                COUNT(c.id) AS total_courses
+            FROM 
+                courses c
+            JOIN 
+                users u ON c.created_by = u.id
+            GROUP BY 
+                u.id
+            ORDER BY 
+                total_courses DESC
+            LIMIT 3
+        ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     
     
 

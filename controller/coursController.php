@@ -24,7 +24,7 @@ class CourseController
         $perPage = 3;
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $perPage;
-        $user_id = $_SESSION['user_id'];
+        $user_id = $_SESSION['user_id'] ?? '';
         $courses = $this->courseModel->readAllByUser($user_id,$perPage, $offset);
         $totalCourses = $this->courseModel->countCourses($user_id);
         $totalPages = ceil($totalCourses / $perPage);
@@ -159,7 +159,7 @@ class CourseController
 
     public static function showUsersByCreator() {
         // session_start();
-        $creator_id = $_SESSION['user_id'];
+        $creator_id = $_SESSION['user_id'] ?? '';
         $courseModel = new Course();
         $users = $courseModel->getUsersByCourseCreator($creator_id);
         return $users;

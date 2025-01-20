@@ -19,11 +19,11 @@
       </div>
       <nav class="flex space-x-6">
         <a href="index.php?action=afficherCoursEnss" class="hover:text-gray-300">Cours</a>
-        <a href="#" class="hover:text-gray-300">Statistiques</a>
+        <a href="views/statistiqueEss.php" class="hover:text-gray-300">Statistiques</a>
       </nav>
       <div class="relative">
         <button id="dropdownButton" class="flex items-center space-x-2 focus:outline-none"> 
-          <span id="username" class="font-medium"><?php echo $_SESSION['username'] ?></span>
+          <span id="username" class="font-medium"><?php echo $_SESSION['username'] ?? '' ?></span>
           <i class="bi bi-chevron-down"></i>
         </button>
         <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg p-2">
@@ -86,7 +86,7 @@
               <label for="title" class="block text-gray-700 font-bold">Titre du cours :</label>
               <input type="text" name="title" id="title" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Introduction à JavaScript">
             </div>
-            <input type="hidden" name="created_by" id="created_by" value ="<?php echo $_SESSION['user_id'] ?>" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Introduction à JavaScript">
+            <input type="hidden" name="created_by" id="created_by" value ="<?php echo $_SESSION['user_id'] ?? '' ?>" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Introduction à JavaScript">
             <div>
               <label for="price" class="block text-gray-700 font-bold">Prix :</label>
               <input type="number" step="0.01" name="price" id="price" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: 99.99">

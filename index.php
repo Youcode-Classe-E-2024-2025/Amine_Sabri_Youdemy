@@ -46,6 +46,9 @@ switch ($action) {
     case 'afficheCours':
         $cours->index();
         break;
+    case 'afficherCoursEnss':
+        $cours->afficherCours();
+        break;
     case 'showCourse':
         $cours->show($_GET['id']);
         break;

@@ -31,7 +31,7 @@ class AuthController {
                 }elseif($user['role_id'] == "1" && $user['status'] == "actif"){
                     header('Location: views/layouts/dashbord.php?page=users');
                 }elseif($user['role_id'] == "2" && $user['status'] == "actif"){
-                    header('Location: views/layouts/dashbordEss.php');
+                    header('Location: index.php?action=afficherCoursEnss');
                 }
                 exit();
             } else {
@@ -45,6 +45,7 @@ class AuthController {
         session_start();
         session_destroy();
         header('Location: views/sign/signIn.php');
+        // require("views/sign/signIn.php");
         exit();
     }
 }

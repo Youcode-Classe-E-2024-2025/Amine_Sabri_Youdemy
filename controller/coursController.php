@@ -44,9 +44,10 @@ class CourseController
             $description = $_POST['description'];
             $category_id = intval($_POST['category_id']);
             $price = floatval($_POST['price']);
+            $created_by = $_POST['created_by'];
             $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
 
-            $targetDir = "../uploads/";
+            $targetDir = "./uploads/";
             $imageFileName = null;
             $documentFileName = null;
             $videoFileName = null;
@@ -76,6 +77,7 @@ class CourseController
             $this->courseModel->setDocumentUrl($documentFileName);
             $this->courseModel->setCategoryId($category_id);
             $this->courseModel->setPrice($price);
+            $this->courseModel->setCreated_by($created_by);
             $cours = $this->courseModel->create($tags);
             if($cours) {
                 header("Location: index.php?action=afficherCoursEnss");

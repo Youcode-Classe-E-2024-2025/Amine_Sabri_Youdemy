@@ -33,12 +33,12 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-gray-800"><?php echo htmlspecialchars($course['course_title']); ?></h2>
+                <h2 class="text-2xl font-bold text-gray-800"><?php echo htmlspecialchars($course['title']); ?></h2>
                 <p class="text-gray-600 mt-4">
-                    <strong>Description :</strong> <?php echo htmlspecialchars($course['course_description']); ?>
+                    <strong>Description :</strong> <?php echo htmlspecialchars($course['description']); ?>
                 </p>
                 <p class="text-gray-600 mt-4">
-                    <strong>Catégorie :</strong> <?php echo htmlspecialchars($course['category_name']); ?>
+                    <strong>Catégorie :</strong> <?php echo htmlspecialchars($course['name']); ?>
                 </p>
                 <p class="text-gray-600 mt-4">
                     <strong>Ajouté le :</strong> <?php echo htmlspecialchars(date('d M Y', strtotime($course['created_at']))); ?>
@@ -75,7 +75,7 @@
                             </div>
 
                             <div class="mb-4">
-                                <input type="hidden" id="cours_id" name="cours_id" value="<?php echo $course['course_id']?>">                            </div>
+                                <input type="hidden" id="cours_id" name="cours_id" value="<?php echo $course['id']?>">                            </div>
                             <div class="flex justify-center mt-6">
                                 <button type="submit" class="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     Inscription à un cours

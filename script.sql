@@ -32,6 +32,8 @@ CREATE TABLE courses (
     document_url VARCHAR(255),
     category_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    price int,
+    created_by int not null
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
 

@@ -11,7 +11,7 @@ class Course{
     private $documentUrl;
     private $categoryId;
     private $price;
-    private $createdAt;
+    private $created_by;
     private $db;
 
     public function __construct()
@@ -25,7 +25,7 @@ class Course{
     $this->db->beginTransaction();
 
 
-    $sql = "INSERT INTO courses (title, description, video_url, image_url, document_url, category_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO courses (title, description, video_url, image_url, document_url, category_id, price,created_by) VALUES (?, ?, ?, ?, ?, ?, ? , ?)";
     $stmt = $this->db->prepare($sql);
     $stmt->execute([
         $this->title,
@@ -35,6 +35,7 @@ class Course{
         $this->documentUrl,
         $this->categoryId,
         $this->price,
+        $this->created_by
     ]);
     $courseId = $this->db->lastInsertId();
     $sqlTags = "INSERT INTO course_tag (course_id, tag_id) VALUES (?, ?)";
@@ -226,8 +227,17 @@ class Course{
     {
         $this->price = $price;
     }
+    public function getCreated_by()
+    {
+        return $this->created_by;
+    }
+
+    public function setCreated_by($created_by)
+    {
+        $this->created_by =$created_by;
+    }
 }
-$cours = new Course();
+// $cours = new Course();
 // $cours->setTitle('Course Title');
 // $cours->setDescription('Course Description');
 // $cours->setVideoUrl('http://example.com/video');
@@ -251,4 +261,18 @@ $cours = new Course();
 // $cours->update(15);
 
 // $cours->delete(15);
+
+
+// $course = new Course();
+// $course->setTitle("hello word");
+// $course->setDescription("Description");
+// $course->setVideoUrl("http://example.com/video.mp4");
+// $course->setImageUrl("http://example.com/image.jpg");
+// $course->setDocumentUrl("http://example.com/document.pdf");
+// $course->setCategoryId(1);
+// $course->setPrice(100);
+// $course->setCreated_by(6); 
+
+// $tags = [1, 2, 3]; 
+// $course->create($tags);
 ?>

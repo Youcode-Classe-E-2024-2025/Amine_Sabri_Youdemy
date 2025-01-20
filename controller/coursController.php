@@ -100,6 +100,60 @@ class CourseController
             }
         }
     }
+
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'];
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $category_id = intval($_POST['category_id']);
+            $price = floatval($_POST['price']);
+
+            $targetDir = "../uploads/";
+            $imageFileName = null;
+            $documentFileName = null;
+            $videoFileName = null;
+
+            if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] == 0) {
+                $imageFileName = basename($_FILES['image_url']['name']);
+                $imageTargetFile = $targetDir . $imageFileName;
+                move_uploaded_file($_FILES['image_url']['tmp_name'], $imageTargetFile);
+            }
+
+            if (isset($_FILES['document_url']) && $_FILES['document_url']['error'] == 0) {
+                $documentFileName = basename($_FILES['document_url']['name']);
+                $documentTargetFile = $targetDir . $documentFileName;
+                move_uploaded_file($_FILES['document_url']['tmp_name'], $documentTargetFile);
+            }
+
+            if (isset($_FILES['video_url']) && $_FILES['video_url']['error'] == 0) {
+                $videoFileName = basename($_FILES['video_url']['name']);
+                $videoTargetFile = $targetDir . $videoFileName;
+                move_uploaded_file($_FILES['video_url']['tmp_name'], $videoTargetFile);
+            }
+
+            $this->courseModel->setTitle($title);
+            $this->courseModel->setDescription($description);
+            $this->courseModel->setVideoUrl($videoFileName);
+            $this->courseModel->setImageUrl($imageFileName);
+            $this->courseModel->setDocumentUrl($documentFileName);
+            $this->courseModel->setCategoryId($category_id);
+            $this->courseModel->setPrice($price);
+            if ($this->courseModel->update($id)) {
+                header("Location: index.php?action=afficherCoursEnss");
+                echo "biew";
+                exit;
+            } else {
+                echo "Erreur lors de la mise à jour du cours.";
+            }
+        }
+
+        // $course = $this->courseModel->readOne($id);
+
+        // include '../views/courses/update.php';
+    }
+
 }
 
 // $show = new CourseController();

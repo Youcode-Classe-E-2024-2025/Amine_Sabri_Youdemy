@@ -34,6 +34,7 @@
   <main>
     <section class="p-6">
       <button id ="bottonAjouterCouer" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Ajouter un Cours</button>
+      <button id ="bottonUpdateCouer" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Update un Cours</button>
         <table class="min-w-full bg-white shadow-md rounded-lg mt-6">
             <thead>
                 <tr>
@@ -52,7 +53,7 @@
                         <td class="py-2 px-4 text-gray-700"><?= htmlspecialchars($course['name']) ?></td>
                         <td class="py-2 px-4 text-gray-700"><?= htmlspecialchars($course['tags']) ?></td>
                         <td class="py-2 px-4 text-gray-700">
-                            <a  href="index.php?action=afficherCours&id=<?= $course['id'] ?>" class="bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600">Modifier</a>
+                            <a  href="index.php?action=afficherCoursEnss&id=<?= $course['id'] ?>" class="bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600">Modifier</a>
                             <a href="index.php?action=deleteCours&id=<?= $course['id'] ?>" class="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600">Supprimer</a>
                         </td>
                     </tr>
@@ -73,7 +74,7 @@
           <?php endfor; ?>
         </div>
     </section>
-    <div id="formJouteCours" class="container mx-auto hidden">
+    <section id="formJouteCours" class="container mx-auto hidden">
         <form action="./index.php?action=createCours" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -124,7 +125,63 @@
             <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Ajouter le cours</button>
           </div>
         </form>
-    </div>
+    </section>
+
+
+    <section id="formUpdateCours" class="hidden">
+        <?php 
+        $id = $_GET["id"] ?? '';
+        $courses = Course::readOne($id);
+        // var_dump($courses);
+        ?>
+        <form action="./index.php?action=UpdateCours" method="POST" enctype="multipart/form-data" class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg space-y-6">
+            <div>
+                <label for="title" class="block text-sm font-medium text-gray-700">Titre du cours</label>
+                <input type="text" name="title" value="<?= $courses['title'] ?? '' ?>" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <input type="hidden" name="id" value="<?= $id ?>" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div>
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea name="description" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"><?= $courses['description'] ?? '' ?></textarea>
+            </div>
+
+            <div>
+                <?php $categories = Category::readAll(); ?>
+                <label for="category_id" class="block text-sm font-medium text-gray-700">Catégorie</label>
+                <select name="category_id" id="category_id" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" disabled selected>Choisir une catégorie</option>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?= $category['id'] ?>">
+                            <?= htmlspecialchars($category['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div>
+                <label for="price" class="block text-sm font-medium text-gray-700">Prix</label>
+                <input type="number" name="price" value="<?= $courses['price'] ?>" required class="mt-1 block w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label for="image_url" class="block text-sm font-medium text-gray-700">Image</label>
+                <input type="file" name="image_url" value="<?= $courses['image_url'] ?>" class="mt-1 block w-full text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div>
+                <label for="document_url" class="block text-sm font-medium text-gray-700">Document</label>
+                <input type="file" name="document_url" class="mt-1 block w-full text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+
+            <div>
+                <label for="video_url" class="block text-sm font-medium text-gray-700">Vidéo</label>
+                <input type="file" name="video_url" class="mt-1 block w-full text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+
+            <div class="flex justify-end">
+                <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Mettre à jour</button>
+            </div>
+        </form>
+
+    </section>
   </main>
 
   <script>
@@ -145,11 +202,16 @@
     });
 
     const bottonAjouterCouer = document.querySelector("#bottonAjouterCouer");
-      const formJouteCours = document.querySelector("#formJouteCours");
+    const bottonUpdateCouer = document.querySelector("#bottonUpdateCouer");
+    const formJouteCours = document.querySelector("#formJouteCours");
+    const formUpdateCours = document.querySelector("#formUpdateCours");
 
 
         bottonAjouterCouer.addEventListener('click',function(){
           formJouteCours.classList.toggle("hidden");
+        });
+        bottonUpdateCouer.addEventListener('click',function(){
+          formUpdateCours.classList.toggle("hidden");
         });
   </script>
 </body>

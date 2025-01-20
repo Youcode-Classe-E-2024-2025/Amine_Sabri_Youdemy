@@ -93,18 +93,21 @@ class Course{
     }
     
 
-    public function readOne($id)
+    public static function readOne($id)
     {
+        $database = new Database();
+        $db = $database->getConnection();
         $sql = "
             SELECT 
-                courses.id AS course_id,
-                courses.title AS course_title,
-                courses.description AS course_description,
+                courses.id ,
+                courses.title ,
+                courses.description ,
                 courses.video_url,
                 courses.image_url,
                 courses.document_url,
                 courses.created_at,
-                categories.name AS category_name,
+                courses.price,
+                categories.name,
                 GROUP_CONCAT(tags.name SEPARATOR ', ') AS tags
             FROM 
                 courses
@@ -119,10 +122,10 @@ class Course{
             GROUP BY 
                 courses.id, categories.name;
         ";
-        $stmt = $this->db->prepare($sql);
+        $stmt = $db->prepare($sql);
         $stmt->execute([$id]);
-        $cours = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $cours;
+        $courses = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $courses;
         // var_dump($cours);
     }
 

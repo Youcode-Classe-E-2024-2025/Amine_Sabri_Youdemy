@@ -55,6 +55,9 @@ switch ($action) {
     case 'deleteCours':
         $cours->delete();
         break;
+    case 'UpdateCours':
+        $cours->update();
+        break;
     case 'showCourse':
         $cours->show($_GET['id']);
         break;

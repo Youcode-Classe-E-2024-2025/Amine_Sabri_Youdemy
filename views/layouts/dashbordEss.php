@@ -41,6 +41,8 @@
                     <th class="py-2 px-4 text-left text-gray-600">Titre</th>
                     <th class="py-2 px-4 text-left text-gray-600">Catégorie</th>
                     <th class="py-2 px-4 text-left text-gray-600">Tags</th>
+                    <th class="py-2 px-4 text-left text-gray-600">Price</th>
+                    <th class="py-2 px-4 text-left text-gray-600">Image</th>
                     <th class="py-2 px-4 text-left text-gray-600">Actions</th>
                 </tr>
             </thead>
@@ -52,9 +54,11 @@
                         <td class="py-2 px-4 text-gray-700"><?= htmlspecialchars($course['title']) ?></td>
                         <td class="py-2 px-4 text-gray-700"><?= htmlspecialchars($course['name']) ?></td>
                         <td class="py-2 px-4 text-gray-700"><?= htmlspecialchars($course['tags']) ?></td>
+                        <td class="py-2 px-4 text-gray-700"><?= htmlspecialchars($course['price']) ?></td>
+                        <td class="py-2 px-4 text-gray-700">    <img src="./uploads/<?= htmlspecialchars($course['image_url']) ?>" alt="Image du cours" class="h-12 w-12 object-cover"></td>
                         <td class="py-2 px-4 text-gray-700">
-                            <a  href="index.php?action=afficherCoursEnss&id=<?= $course['id'] ?>" class="bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600">Modifier</a>
-                            <a href="index.php?action=deleteCours&id=<?= $course['id'] ?>" class="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600">Supprimer</a>
+                            <a  href="index.php?action=afficherCoursEnss&id=<?= $course['id'] ?>" class=" text-yellow-400 py-1 px-3 rounded-md "><i class="bi bi-pencil-square"></i></a>
+                            <a href="index.php?action=deleteCours&id=<?= $course['id'] ?>" class="text-red-500 py-1 px-3 rounded-md"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

@@ -266,6 +266,17 @@ public function countCourses($user_id) {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result['total_users'] : 0;
     }
+
+    public static function countTotalCourses() {
+        $database = new Database();
+        $db = $database->getConnection();
+        $sql = "SELECT COUNT(*) AS total_courses FROM courses";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['total_courses'] : 0; // Retourne 0 si aucun résultat
+    }
+    
     
     
 

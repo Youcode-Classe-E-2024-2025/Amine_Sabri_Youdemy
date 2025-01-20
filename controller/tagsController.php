@@ -16,14 +16,14 @@ class TagController {
             header('Location: views/layouts/dashbord.php?page=tags');
         }
     }    
-    public function update($id, $name) {
+    public function upadteTag() {
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $id = $_POST['id'];
+        $name = $_POST['name'];
         $this->modelTag->setId($id);
         $this->modelTag->setName($name);
-        
-        if ($this->modelTag->update()) {
-            return ['success' => true, 'message' => 'Tag updated successfully.'];
-        } else {
-            return ['success' => false, 'message' => 'Failed to update tag.'];
+        $tags = $this->modelTag->update();
+        header('Location: views/layouts/dashbord.php?page=tags');
         }
     }
     
@@ -45,6 +45,10 @@ class TagController {
             'totalPages' => $totalPages,
             'currentPage' => $page
         ];
+    }
+
+    public function getTagsById($id) {
+        return $this->modelTag->findById($id);
     }
     
 }

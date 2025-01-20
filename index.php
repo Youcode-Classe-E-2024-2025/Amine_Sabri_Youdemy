@@ -72,6 +72,9 @@ switch ($action) {
     case 'createTags':
         $tags->createTag();
         break;
+    case 'editTags':
+        $tags->upadteTag();
+        break;
     default:
         header('Location: index.php?action=afficheCours');
         exit;

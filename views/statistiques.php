@@ -6,7 +6,7 @@
             <p class="text-3xl font-bold"><?= $totalCategories ?></p>
         </div>
         <div class="bg-white rounded-lg shadow p-4">
-            <h3 class="text-lg font-semibold mb-2">Revenus</h3>
+            <h3 class="text-lg font-semibold mb-2">Total Tags</h3>
             <p class="text-3xl font-bold"><?= $totalTags ?></p>
         </div>
         <div class="bg-white rounded-lg shadow p-4">

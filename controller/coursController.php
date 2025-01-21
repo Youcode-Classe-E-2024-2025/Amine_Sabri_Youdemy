@@ -14,8 +14,9 @@ class CourseController
         $perPage = 3;
         $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $perPage;
-        $courses = $this->courseModel->readAll($perPage, $offset);
-        $totalCourses = $this->courseModel->countCoursesGuest();
+        $keyword = isset($_POST['keyword']) ? $_POST['keyword'] : "";
+        $totalCourses = $this->courseModel->countCoursesGuest($keyword);
+        $courses = $this->courseModel->readAll($perPage, $offset,$keyword);
         $totalPages = ceil($totalCourses / $perPage);
         include __DIR__ . '/../views/guest.php';
     }

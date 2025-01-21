@@ -49,7 +49,7 @@ class Course{
     return $courseId;
 }
 
-public function readAll($limit, $offset) {
+public function readAll($limit, $offset, $keyword = "") {
     $sql = "
         SELECT 
             c.id,
@@ -69,17 +69,25 @@ public function readAll($limit, $offset) {
         LEFT JOIN 
             course_tag ct ON c.id = ct.course_id
         LEFT JOIN 
-            tags t ON ct.tag_id = t.id
-        GROUP BY 
-            c.id, cat.name
-        ORDER BY 
-            c.created_at DESC
-        LIMIT :limit OFFSET :offset;
-    ";
+            tags t ON ct.tag_id = t.id ";
+
+    if (!empty($keyword)) {
+        $sql .= "WHERE c.title LIKE :keyword OR c.description LIKE :keyword ";
+    }
+
+    $sql .= "GROUP BY 
+                c.id, cat.name
+            ORDER BY 
+                c.created_at DESC
+            LIMIT :limit OFFSET :offset;
+            ";
 
     $stmt = $this->db->prepare($sql);
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    if (!empty($keyword)) {
+        $stmt->bindValue(':keyword', "%".$keyword."%");
+    }
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -124,10 +132,18 @@ public function readAllByUser($user_id, $limit, $offset) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-public function countCoursesGuest() {
-    $sql = "SELECT COUNT(*) AS total FROM courses";
+public function countCoursesGuest($keyword = "") {
+    $sql = "SELECT COUNT(*) AS total FROM courses ";
+
+    if (!empty($keyword)) {
+       $sql .= 'WHERE title LIKE :keyword OR description LIKE :keyword';
+    }
+
     $stmt = $this->db->prepare($sql);
     // $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+    if (!empty($keyword)) {
+        $stmt->bindValue(':keyword', "%".$keyword."%");
+    }
     $stmt->execute();
     
     return $stmt->fetch(PDO::FETCH_ASSOC)['total'];

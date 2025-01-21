@@ -100,11 +100,12 @@ Youdemy est une plateforme de cours en ligne qui vise à révolutionner l'appren
 ## Diagrammes du Projet
 
 ### Diagramme de Classes
-![Diagramme de Classes](./docs/diagramme_classes.png)
+<img width="617" alt="diagramme class" src="https://github.com/user-attachments/assets/2b1c8478-e6c6-414b-9157-4b461cf59cd9" />
 
 Ce diagramme illustre les relations entre les différentes entités principales (Utilisateur, Cours, Tag, etc.).
 
 ### Diagramme de Cas d'Utilisation (Use Case)
-![Diagramme de Cas d'Utilisation](./docs/diagramme_usecase.png)
+<img width="411" alt="useCase youdemy" src="https://github.com/user-attachments/assets/b519aa71-9cf5-42c9-889f-a184064c9897" />
+
 
 Ce diagramme met en évidence les interactions entre les différents types d’utilisateurs et les fonctionnalités de la plateforme.
